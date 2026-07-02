@@ -68,10 +68,37 @@
           </article>
         </div>
         <p>
-          Estos seis elementos interactúan en un ciclo continuo: el agente observa un
-          estado, elige una acción según su política, y el entorno responde con una
-          recompensa y un nuevo estado. Este ciclo se repite muchas veces, permitiendo que
-          el agente mejore su política con cada experiencia.
+          Estos seis elementos interactúan en un ciclo continuo: el agente observa un estado, elige una acción según su política, y el entorno responde con una recompensa y un nuevo estado. Este ciclo se repite muchas veces, permitiendo que el agente mejore su política con cada experiencia.
+        </p>
+      </section>
+
+      <section id="aprendizaje">
+        <h1>El proceso de aprendizaje mediante recompensas</h1>
+        <p>
+          A diferencia del aprendizaje supervisado, donde alguien le dice al modelo cuál es la respuesta correcta, en RL el agente nunca recibe esa respuesta directamente. Solo recibe una señal numérica —la recompensa— que le indica qué tan buena o mala fue su última decisión. A partir de esa señal, el agente ajusta su comportamiento para intentar hacerlo mejor en el futuro.
+        </p>
+        <h2>Exploración vs. explotación</h2>
+        <p>
+          Uno de los desafíos centrales del aprendizaje por refuerzo es decidir cuándo probar algo nuevo y cuándo repetir lo que ya se sabe que funciona. A esto se le llama el equilibrio entre exploración y explotación.
+        </p>
+        <p>
+          Si el agente solo explota lo que ya conoce, repite siempre las mismas acciones y nunca descubre si existe una mejor opción. Si solo explora, prueba cosas nuevas constantemente pero nunca aprovecha lo que ya aprendió. Un agente bien diseñado necesita hacer ambas cosas: seguir explorando estados y acciones nuevos, y al mismo tiempo preferir las acciones que en el pasado le han dado mayores recompensas.
+        </p>
+
+        <h2>Recompensa inmediata vs. beneficio a largo plazo</h2>
+        <p>
+          No toda buena decisión trae una recompensa inmediata, y no toda recompensa inmediata lleva al mejor resultado final. La mejor estrategia general puede requerir sacrificios a corto plazo: una acción que parece negativa en el momento puede ser parte del camino hacia un resultado mucho mejor más adelante.
+        </p>
+        <p>
+          Por eso el objetivo del agente no es maximizar la recompensa de una sola acción, sino la recompensa acumulada a lo largo del tiempo. Esta distinción entre el beneficio inmediato de una acción y su valor real en el contexto de una secuencia de decisiones es uno de los aspectos que hace al RL especialmente útil para problemas donde las consecuencias de una decisión no se conocen de inmediato.
+        </p>
+
+        <h2>Cómo mejora el agente con la experiencia</h2>
+        <p>
+          A medida que el agente interactúa con el entorno, va construyendo un conjunto de reglas o políticas que le indican qué acción conviene tomar en cada estado. Estas reglas no se programan manualmente, sino que emergen del propio proceso de prueba y error: el agente refuerza las acciones que le dieron buenas recompensas y descarta las que no funcionaron.
+        </p>
+        <p>
+          Con suficientes repeticiones, el agente converge hacia una política estable que le permite tomar buenas decisiones ante situaciones que ya ha visto, e incluso generalizar ante situaciones nuevas similares a las que ya conoce.
         </p>
       </section>
     </main>
