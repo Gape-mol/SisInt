@@ -101,6 +101,39 @@
           Con suficientes repeticiones, el agente converge hacia una política estable que le permite tomar buenas decisiones ante situaciones que ya ha visto, e incluso generalizar ante situaciones nuevas similares a las que ya conoce.
         </p>
       </section>
+
+      <section id="algoritmo">
+        <h1>Algoritmo Q-Learning</h1>
+        <p>
+          Existe una variedad de algoritmos de Aprendizaje por Refuerzo, cada uno con distintas formas de estimar qué tan buenas son las acciones del agente. Q-Learning es uno de los más conocidos y utilizados, especialmente cuando el entorno tiene un número manejable de estados y acciones posibles.
+        </p>
+        <h2>¿Qué es Q-Learning?</h2>
+        <p>
+          Q-Learning es un algoritmo de aprendizaje por refuerzo basado en valores. Su objetivo es que el agente aprenda a estimar, para cada par de estado y acción posibles, cuánta recompensa total puede esperar obtener a futuro si toma esa acción en ese estado. A ese valor se le llama valor Q, y se escribe como Q(s, a).
+        </p>
+        <p>
+          Estos valores se almacenan en una estructura llamada tabla Q (Q-table): una tabla donde cada fila es un estado posible y cada columna es una acción posible. Al inicio del entrenamiento, todos los valores son cero porque el agente no sabe nada del entorno. A medida que el agente interactúa y recibe recompensas, los valores se van actualizando hasta reflejar cuál es la mejor acción en cada estado.
+        </p>
+
+        <h2>¿Cómo se actualiza la tabla Q?</h2>
+        <p>
+          Después de cada acción, el agente actualiza el valor Q correspondiente usando la siguiente fórmula:
+        </p>
+        <p>
+          <strong>Q(s, a) ← Q(s, a) + α · [ r + γ · max Q(s') − Q(s, a) ]</strong>
+        </p>
+        <p>Donde:</p>
+        <ul>
+          <li><strong>Q(s, a)</strong>: el valor actual estimado para ese par estado-acción.</li>
+          <li><strong>α (alfa)</strong>: la tasa de aprendizaje, controla cuánto peso se le da a la nueva información.</li>
+          <li><strong>r</strong>: la recompensa recibida por esa acción.</li>
+          <li><strong>γ (gamma)</strong>: el factor de descuento, controla cuánto importan las recompensas futuras frente a la recompensa inmediata.</li>
+          <li><strong>max Q(s')</strong>: el mejor valor Q posible desde el siguiente estado, es decir, una estimación de cuánto se puede ganar a futuro.</li>
+        </ul>
+        <p>
+          Con cada actualización, el agente incorpora lo que acaba de aprender sin olvidar todo lo anterior. Después de muchas repeticiones, los valores Q convergen y la tabla refleja la política óptima: en cada estado, la acción con el valor Q más alto es la mejor decisión posible.
+        </p>
+      </section>
     </main>
 
     <footer>
@@ -116,6 +149,12 @@
           Amazon Web Services (AWS). <em>¿Qué es el Aprendizaje mediante refuerzo?</em>
           <a href="https://aws.amazon.com/es/what-is/reinforcement-learning/" target="_blank" rel="noopener noreferrer">
             aws.amazon.com/es/what-is/reinforcement-learning
+          </a>
+        </li>
+        <li>
+          Shweta Goyal (2023). <em>Introducción a Q-Learning: aprendizaje por refuerzo.</em>
+          <a href="https://www.freecodecamp.org/espanol/news/introduccion-a-q-learning-aprendizaje-por-refuerzo/" target="_blank" rel="noopener noreferrer">
+            freecodecamp.org/espanol/news/introduccion-a-q-learning-aprendizaje-por-refuerzo
           </a>
         </li>
       </ul>
