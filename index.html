@@ -23,6 +23,57 @@
           Este enfoque ofrece ventajas frente a otros métodos de aprendizaje automático. Suele desempeñarse mejor en entornos complejos y cambiantes, donde ni siquiera una persona con buen conocimiento del problema podría determinar fácilmente la mejor estrategia. Requiere menos intervención humana, ya,que no depende de que alguien etiquete datos de entrenamiento. Y la recompensa acumulada en el tiempo, en lugar de el resultado de una sola acción, es especialmente adecuada para problemas donde las consecuencias de una decisión no se conocen de inmediato, sino varios pasos después.
         </p>
       </section>
+
+      <section id="conceptos">
+        <h1>Conceptos fundamentales de Aprendizaje por Refuerzo</h1>
+        <p>
+          Todo problema de RL se describe con las mismas seis piezas, sin importar el dominio en el que se aplique. Conocerlas es clave para entender cómo funciona cualquier sistema de Aprendizaje por Refuerzo.
+        </p>
+        <div class="cards">
+          <article>
+            <h2>Agente</h2>
+            <p>
+              El agente es el algoritmo o sistema autónomo que toma las decisiones. Es quien interactúa con el entorno, elige qué acción ejecutar en cada momento y aprende de las consecuencias de esas acciones. Puede ser un programa de software, un robot, o cualquier sistema capaz de percibir su entorno y actuar sobre él.
+            </p>
+          </article>
+          <article>
+            <h2>Entorno</h2>
+            <p>
+              El entorno es todo lo externo al agente con lo que este interactúa. Define las reglas, los límites y las consecuencias posibles de cada acción. Es el espacio del problema en el que el agente se mueve: puede ser un juego, una simulación, o un sistema del mundo real.
+            </p>
+          </article>
+          <article>
+            <h2>Estado (S)</h2>
+            <p>
+              El estado es la representación del entorno en un instante determinado. Es la información que el agente percibe antes de decidir qué hacer. El conjunto de todos los estados posibles se conoce como espacio de estados.
+            </p>
+          </article>
+          <article>
+            <h2>Acción (A)</h2>
+            <p>
+              Una acción es cada uno de los pasos que el agente puede ejecutar para navegar por el entorno. El conjunto de todas las acciones posibles se conoce como espacio de acciones. En cada estado, el agente elige una acción y el entorno responde a ella.
+            </p>
+          </article>
+          <article>
+            <h2>Recompensa (R)</h2>
+            <p>
+              La recompensa es la señal numérica que el entorno entrega al agente después de cada acción, indicando qué tan buena o mala fue esa decisión. Puede ser positiva, negativa o cero. El único objetivo del agente es maximizar su recompensa acumulada a lo largo del tiempo, no solo la de una acción aislada.
+            </p>
+          </article>
+          <article>
+            <h2>Política (π)</h2>
+            <p>
+              La política es la estrategia aprendida por el agente: define su comportamiento mapeando los estados percibidos a las acciones que debe tomar en cada uno de ellos. Es el resultado final del proceso de aprendizaje. Una política bien entrenada permite al agente tomar la mejor decisión posible ante cualquier estado que encuentre.
+            </p>
+          </article>
+        </div>
+        <p>
+          Estos seis elementos interactúan en un ciclo continuo: el agente observa un
+          estado, elige una acción según su política, y el entorno responde con una
+          recompensa y un nuevo estado. Este ciclo se repite muchas veces, permitiendo que
+          el agente mejore su política con cada experiencia.
+        </p>
+      </section>
     </main>
 
     <footer>
@@ -41,6 +92,13 @@
           </a>
         </li>
       </ul>
+      <h2>Video complementario</h2>
+      <p>
+          El siguiente video muestra un ejemplo concreto de un agente aprendiendo a manejar mediante Aprendizaje por Refuerzo, lo que permite visualizar en la práctica los conceptos descritos anteriormente.
+          <a href="https://www.youtube.com/embed/5vwBQ_KoD60" target="_blank" rel="noopener noreferrer">
+            Video: ¿Cuánto Tarda Esta IA En Aprender A Manejar?
+          </a>
+        </p>
     </footer>
   </body>
 </html>
