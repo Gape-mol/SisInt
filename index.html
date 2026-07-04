@@ -20,7 +20,7 @@
           Dentro del aprendizaje automático suelen distinguirse tres grandes paradigmas. El aprendizaje supervisado necesita que una persona etiquete de antemano cada ejemplo con la respuesta correcta, y el modelo aprende a predecir esa respuesta para datos nuevos. El aprendizaje no supervisado recibe datos sin etiquetas y busca patrones ocultos en ellos. El Aprendizaje por Refuerzo no se parece a ninguno de los dos, no aprende a predecir ni a encontrar patrones, sino a actuar. No recibe ejemplos etiquetados de comportamiento correcto, sino que el propio agente genera experiencias que lo ayudarán a tomar decisiones a medida que interactúa con su entorno.
         </p>
         <p>
-          Este enfoque ofrece ventajas frente a otros métodos de aprendizaje automático. Suele desempeñarse mejor en entornos complejos y cambiantes, donde ni siquiera una persona con buen conocimiento del problema podría determinar fácilmente la mejor estrategia. Requiere menos intervención humana, ya que, no depende de que alguien etiquete datos de entrenamiento. Y la recompensa acumulada en el tiempo, en lugar del resultado de una sola acción, es especialmente adecuada para problemas donde las consecuencias de una decisión no se conocen de inmediato, sino varios pasos después.
+          Este enfoque ofrece ventajas frente a otros métodos de aprendizaje automático. Suele desempeñarse mejor en entornos complejos y cambiantes, donde ni siquiera una persona con buen conocimiento del problema podría determinar fácilmente la mejor estrategia. Requiere menos intervención humana, ya que no depende de que alguien etiquete datos de entrenamiento. Y la recompensa acumulada en el tiempo, en lugar del resultado de una sola acción, es especialmente adecuada para problemas donde las consecuencias de una decisión no se conocen de inmediato, sino varios pasos después.
         </p>
       </section>
 
@@ -132,6 +132,59 @@
         </ul>
         <p>
           Con cada actualización, el agente incorpora lo que acaba de aprender sin olvidar todo lo anterior. Después de muchas repeticiones, los valores Q convergen y la tabla refleja la política óptima: en cada estado, la acción con el valor Q más alto es la mejor decisión posible.
+        </p>
+      </section>
+
+      <section id="caso-practico">
+        <h1>Caso práctico: detección de anomalías en tráfico vehicular</h1>
+        <p>
+          Para ilustrar cómo funciona el Aprendizaje por Refuerzo en un problema real, se modela una intersección urbana monitoreada por sensores. El objetivo del agente es observar lo que los sensores detectan en cada momento y decidir qué tipo de respuesta corresponde, aprendiendo a distinguir situaciones normales de anomalías a través de la experiencia.
+        </p>
+        <h2>El entorno</h2>
+        <p>
+          El entorno es la intersección y sus sensores. Estos registran en todo momento tres variables: el nivel de flujo vehicular, el patrón de circulación y si existe algún incidente activo. El agente no tiene acceso a ninguna otra información, solo a lo que los sensores le reportan.
+        </p>
+        <h2>El estado</h2>
+        <p>
+          Cada estado es una combinación de las tres variables que el sensor detecta en un instante dado:
+        </p>
+        <ul>
+          <li><strong>Nivel de flujo</strong>: bajo, medio o alto.</li>
+          <li><strong>Patrón</strong>: normal o irregular.</li>
+          <li><strong>Incidente</strong>: ninguno, vehículo a contraflujo, bloqueo de intersección o exceso de velocidad.</li>
+        </ul>
+        <p>
+          Por ejemplo, un estado podría ser: flujo alto, patrón irregular, vehículo a contraflujo. Otro estado podría ser: flujo bajo, patrón normal, sin incidentes. La combinación de estas variables define exactamente qué está ocurriendo en la intersección en ese momento.
+        </p>
+        <h2>Las acciones</h2>
+        <p>
+          Ante cada estado, el agente puede elegir una de cuatro acciones posibles:
+        </p>
+        <ul>
+          <li>
+            <strong>Marcar como normal</strong>: el tráfico está dentro de lo esperado, no se requiere ninguna intervención.
+          </li>
+          <li>
+            <strong>Alerta leve</strong>: algo está fuera de lo habitual pero no representa un peligro inmediato. El sistema registra la situación y la monitorea de cerca.
+          </li>
+          <li>
+            <strong>Alerta crítica</strong>: hay un incidente concreto que requiere intervención. Se envía un equipo de control de tránsito a resolver la situación.
+          </li>
+          <li>
+            <strong>Protocolo de emergencia</strong>: la situación representa un riesgo alto para las personas. Se activan semáforos de emergencia y se contacta a las autoridades de forma inmediata.
+          </li>
+        </ul>
+        <h2>La recompensa</h2>
+        <p>
+          Después de cada decisión, el agente recibe una recompensa que indica qué tan acertada fue su respuesta respecto a la severidad real de la situación:
+        </p>
+        <ul>
+          <li><strong>+2</strong>: la acción elegida coincide exactamente con la severidad real del estado.</li>
+          <li><strong>-1</strong>: la acción está un nivel por encima o por debajo de la correcta. Por ejemplo, responder con alerta crítica ante algo que solo requería alerta leve, o viceversa.</li>
+          <li><strong>-3</strong>: la acción está muy lejos de lo correcto. Por ejemplo, marcar como normal una situación de emergencia, o activar un protocolo de emergencia ante tráfico completamente normal.</li>
+        </ul>
+        <p>
+          Esta estructura de recompensas penaliza tanto la sobrereacción como la subreacción. Un agente que aprende bien no solo evita ignorar emergencias, sino que también evita generar falsas alarmas innecesarias.
         </p>
       </section>
     </main>
