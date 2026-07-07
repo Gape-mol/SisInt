@@ -14,6 +14,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function updateActiveLink() {
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    if (scrollY < 50) {
+      setActiveLink(sections[0]?.id);
+      return;
+    }
+
+    if (scrollY + viewportHeight >= docHeight - 50) {
+      setActiveLink(sections[sections.length - 1]?.id);
+      return;
+    }
+
+    const marker = scrollY + viewportHeight * 0.35;
+    let activeId = sections[0]?.id;
+
+    for (const section of sections) {
+      if (section.offsetTop <= marker) {
+        activeId = section.id;
+      }
+    }
+
+    setActiveLink(activeId);
+  }
+
   window.addEventListener('scroll', updateActiveLink, { passive: true });
   window.addEventListener('resize', updateActiveLink, { passive: true });
   updateActiveLink();
