@@ -95,18 +95,134 @@
   background-color: #e37400;
 }
 
-/* Margen lateral para situar la navbar*/
-main,
-footer {
-  margin-left: 3rem;
+/* Base y tipografía */
+:root {
+  --color-fondo: #f8f9fa;
+  --color-texto: #212529;
+  --color-texto-secundario: #495057;
+  --color-borde: #dee2e6;
+  --color-acento: #1a73e8;
+  --color-tarjeta: #ffffff;
+  --radio-borde: 8px;
+  --sombra-suave: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --fuente: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+}
+
+
+
+/* Layout general */
+main,
+footer {
+  width: 100%;
+  padding: 2rem 4rem 2rem 5rem;
+}
+
+footer {
+  border-top: 1px solid var(--color-borde);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  color: var(--color-texto-secundario);
+  font-size: 0.95rem;
+}
+
+/* Secciones */
+section {
+  margin-bottom: 3rem;
+}
+
+section h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 1rem;
+  color: var(--color-texto);
+}
+
+section h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+  color: var(--color-texto);
+}
+
+section p {
+  margin: 0 0 1rem;
+}
+
+section ul {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+
+section li {
+  margin-bottom: 0.5rem;
+}
+
+/* Enlaces */
+a {
+  color: var(--color-acento);
+  text-decoration: underline;
+}
+
+a:hover,
+a:focus {
+  color: #1557b0;
+}
+
+/* Footer */
+footer h2 {
+  font-size: 1.25rem;
+  margin: 0 0 0.75rem;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+footer li {
+  margin-bottom: 0.5rem;
+}
+
+
 /*Tarjetas de conceptos*/
+
 #conceptos .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin: 1.5rem 0;
+}
+
+#conceptos article {
+  background-color: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  padding: 1.25rem;
+  box-shadow: var(--sombra-suave);
+}
+
+#conceptos article h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
 }
 
 #conceptos article {
