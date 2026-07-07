@@ -66,6 +66,35 @@
   transform: translateX(0);
 }
 
+/* Colores de los puntos por sección */
+.nav-link[href="#intro"] .nav-dot {
+  background-color: #1a73e8;
+}
+
+.nav-link[href="#conceptos"] .nav-dot {
+  background-color: #34a853;
+}
+
+.nav-link[href="#aprendizaje"] .nav-dot {
+  background-color: #f9ab00;
+}
+
+.nav-link[href="#algoritmo"] .nav-dot {
+  background-color: #9334e6;
+}
+
+.nav-link[href="#caso-practico"] .nav-dot {
+  background-color: #ea4335;
+}
+
+.nav-link[href="#simulador"] .nav-dot {
+  background-color: #00acc1;
+}
+
+.nav-link[href="#conclusiones"] .nav-dot {
+  background-color: #e37400;
+}
+
 /* Margen lateral para situar la navbar*/
 main,
 footer {
