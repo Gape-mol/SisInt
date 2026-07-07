@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('#navbar .nav-link');
-  const linkById = new Map(
-    Array.from(navLinks).map(link => [link.getAttribute('href').slice(1), link])
+
+  const anchorLinks = Array.from(navLinks).filter(link =>
+    link.getAttribute('href').startsWith('#')
   );
-  const sections = Array.from(linkById.keys())
-    .map(id => document.getElementById(id))
+
+  const sections = anchorLinks
+    .map(link => document.getElementById(link.getAttribute('href').slice(1)))
     .filter(Boolean);
 
   function setActiveLink(id) {
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', updateActiveLink, { passive: true });
   updateActiveLink();
 
-  navLinks.forEach(link => {
+  anchorLinks.forEach(link => {
     link.addEventListener('click', event => {
       event.preventDefault();
       const target = document.querySelector(link.getAttribute('href'));

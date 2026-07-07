@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/simulador.css">
+    <title>Simulador — RL para Detección de Anomalías</title>
+  </head>
+  <body>
+    <nav id="navbar" class="nav-dots" aria-label="Navegación del simulador">
+      <a href="./index.html" class="nav-link nav-link-arrow" aria-label="Volver a la página principal">
+        <img src="./assets/left-arrow.svg" alt="" class="nav-arrow" />
+        <span class="nav-label">Volver</span>
+      </a>
+    </nav>
+
+    <main>
+      <section id="simulador">
+        <h1>Simulador: agente RL en tráfico vehicular</h1>
+        <p>
+          Este simulador entrena un agente Q-Learning para decidir la respuesta correcta ante cada estado de la intersección.<br>
+          Elige un modo para comenzar.
+        </p>
+
+        <div id="selector-modo" class="selector-modo">
+          <button type="button" class="btn-modo" data-modo="entrenamiento">
+            <strong>Entrenar agente</strong>
+            <span>Observa cómo el agente aprende a detectar anomalías con Q-Learning.</span>
+          </button>
+          <button type="button" class="btn-modo" data-modo="comparativo">
+            <strong>Tú eres el agente</strong>
+            <span>Toma decisiones tú mismo y compáralas con el agente entrenado.</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Icono de flecha atrás obtenido de
+        <a href="https://www.svgrepo.com" target="_blank" rel="noopener noreferrer">SVG Repo</a>.
+      </p>
+    </footer>
+  </body>
+</html>

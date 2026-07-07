@@ -1,0 +1,54 @@
+/* Flecha "volver" en el simulador */
+.nav-arrow {
+  display: block;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.nav-link-arrow:hover .nav-arrow,
+.nav-link-arrow:focus .nav-arrow {
+  transform: scale(1.15);
+  transition: transform 0.2s ease;
+}
+
+/* Selector de modo */
+.selector-modo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.btn-modo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  text-align: left;
+  color: var(--color-texto);
+  background-color: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-modo:hover,
+.btn-modo:focus {
+  border-color: var(--color-acento);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn-modo strong {
+  font-size: 1.15rem;
+  color: var(--color-acento);
+}
+
+.btn-modo span {
+  color: var(--color-texto-secundario);
+  line-height: 1.5;
+}
