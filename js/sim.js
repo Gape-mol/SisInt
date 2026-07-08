@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     historialRecompensas.push(recompensaEpisodio);
     actualizarMetricasUI();
     Vistas.renderizarQTable(agente);
+    Vistas.renderizarGrafico(historialRecompensas);
 
     if (comprobarUmbral()) {
       detenerEntrenamiento();
@@ -232,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (entrenando) {
         pausarEntrenamiento();
-        alert('Has cambiado los hiperparametros. El entrenamiento se ha pausado. Pulsa Reiniciar agente para aplicarlos desde cero.');
+        alert('Has cambiado los hiperparametros. El entrenamiento se ha pausado. Pulsa Reiniciar todo para aplicarlos desde cero.');
       }
     });
   });
@@ -250,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // inicializacion
   Vistas.inicializar('q-table-contenedor');
+  Vistas.inicializarGrafico('grafico-contenedor');
   crearAgente();
   actualizarMetricasUI();
   actualizarBotonesEntrenamiento();

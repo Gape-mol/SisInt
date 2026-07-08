@@ -87,13 +87,17 @@
               <button id="btn-entrenar" type="button" class="btn-primario">Entrenar</button>
               <button id="btn-pausar" type="button" class="btn-secundario" disabled>Pausar</button>
               <button id="btn-paso" type="button" class="btn-secundario">Paso</button>
-              <button id="btn-reiniciar" type="button" class="btn-peligro">Reiniciar agente</button>
+              <button id="btn-reiniciar" type="button" class="btn-peligro">Reiniciar todo</button>
             </div>
             <div id="estado-entrenamiento" class="estado-entrenamiento">
               Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 100 episodios con una media ≥ 1.2 en los últimos 10 episodios, o al llegar a 300 episodios.
             </div>
           </div>
 
+          <div id="grafico-contenedor" class="grafico-contenedor" aria-live="polite">
+            <p class="grafico-vacio">Entrena el agente para ver la evolución de la recompensa.</p>
+          </div>
+          
           <div id="q-table-contenedor" class="q-table-contenedor" aria-live="polite">
             <p class="q-table-vacia">Entrena el agente para ver la tabla Q.</p>
           </div>
