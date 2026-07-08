@@ -27,6 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const metricaEpsilon = document.getElementById('metrica-epsilon');
   const estadoEntrenamiento = document.getElementById('estado-entrenamiento');
 
+  // referencias de las pestañas
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
   // constantes de configuracion del entrenamiento
   const EPISODIOS_MIN = 100;
   const EPISODIOS_MAX = 300;
@@ -41,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let episodiosCompletados = 0;
   let recompensaTotal = 0;
   let historialRecompensas = [];
+  let animacionCongelada = false;
 
   // formatea un numero con dos decimales
   function formatearNumero(n) {
@@ -86,6 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
     return (suficientesEpisodios && mediaOk) || techoAlcanzado;
   }
 
+  // sincroniza la animación de la intersección con el estado del entrenamiento
+  function sincronizarAnimacion() {
+    const congelar = entrenando && !pausado;
+    if (congelar && !animacionCongelada) {
+      Interseccion.pausarAnimacion();
+      animacionCongelada = true;
+    } else if (!congelar && animacionCongelada) {
+      Interseccion.reanudarAnimacion();
+      animacionCongelada = false;
+    }
+  }
+
   // reinicia el agente y las metricas de entrenamiento
   function resetearEntrenamiento() {
     if (timeoutId) {
@@ -100,7 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
     crearAgente();
     actualizarMetricasUI();
     Vistas.limpiar();
+    Interseccion.limpiar();
+    Interseccion.inicializar('interseccion-contenedor');
+    animacionCongelada = false;
+    Interseccion.reanudarAnimacion();
     actualizarBotonesEntrenamiento();
+    sincronizarAnimacion();
     estadoEntrenamiento.innerHTML =
       'Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 100 episodios con una media ≥ 1.2 en los ultimos 10 episodios, o al llegar a 300 episodios.';
   }
@@ -111,6 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let recompensaEpisodio = 0;
     let estado = EntornoTrafico.estadoAleatorio();
+    let ultimoEstado = estado;
+    let ultimaAccion = 0;
 
     for (let paso = 0; paso < PASOS_POR_EPISODIO; paso++) {
       const clave = EntornoTrafico.claveEstado(estado);
@@ -121,6 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       agente.actualizar(clave, accion, recompensa, siguienteClave);
       recompensaEpisodio += recompensa;
+      ultimoEstado = estado;
+      ultimaAccion = accion;
       estado = siguienteEstado;
     }
 
@@ -131,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarMetricasUI();
     Vistas.renderizarQTable(agente);
     Vistas.renderizarGrafico(historialRecompensas);
+    Interseccion.actualizarEstado(ultimoEstado, ultimaAccion);
 
     if (comprobarUmbral()) {
       detenerEntrenamiento();
@@ -163,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     actualizarBotonesEntrenamiento();
+    sincronizarAnimacion();
     siguientePaso();
   }
 
@@ -174,6 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timeoutId = null;
     }
     actualizarBotonesEntrenamiento();
+    sincronizarAnimacion();
   }
 
   // detiene el entrenamiento por completo
@@ -185,11 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
       timeoutId = null;
     }
     actualizarBotonesEntrenamiento();
+    sincronizarAnimacion();
   }
 
   // avanza un unico episodio manualmente
   function ejecutarUnPaso() {
     if (entrenando) return;
+    sincronizarAnimacion();
     ejecutarEpisodio();
   }
 
@@ -219,10 +250,33 @@ document.addEventListener('DOMContentLoaded', () => {
     marcarModoActivo('entrenamiento');
   }
 
+  // cambia entre las pestañas de visualización
+  function cambiarTab(tabId) {
+    tabButtons.forEach(btn => {
+      const activo = btn.dataset.tab === tabId;
+      btn.classList.toggle('active', activo);
+      btn.setAttribute('aria-selected', activo);
+    });
+
+    tabContents.forEach(content => {
+      const mostrar = content.id === `tab-${tabId}`;
+      content.hidden = !mostrar;
+    });
+
+    if (tabId === 'grafico') {
+      Vistas.renderizarGrafico(historialRecompensas);
+    }
+  }
+
   // event listeners del selector de modo
   if (botonEntrenamiento) {
     botonEntrenamiento.addEventListener('click', mostrarEntrenamiento);
   }
+
+  // event listeners de las pestañas
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => cambiarTab(btn.dataset.tab));
+  });
 
   // actualiza etiquetas de hiperparametros y pausa si cambian durante entrenamiento
   [inputAlpha, inputGamma, inputEpsilon].forEach(input => {
@@ -252,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // inicializacion
   Vistas.inicializar('q-table-contenedor');
   Vistas.inicializarGrafico('grafico-contenedor');
+  Interseccion.inicializar('interseccion-contenedor');
   crearAgente();
   actualizarMetricasUI();
   actualizarBotonesEntrenamiento();

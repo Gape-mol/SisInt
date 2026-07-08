@@ -40,66 +40,91 @@
             <h2>Modo entrenamiento</h2>
           </div>
 
-          <div class="panel-controles">
-            <div class="control">
-              <label for="alpha">Tasa de aprendizaje (α)</label>
-              <input type="range" id="alpha" min="0.01" max="1" step="0.01" value="0.5">
-              <span id="alpha-valor">0.5</span>
-            </div>
-            <div class="control">
-              <label for="gamma">Factor de descuento (γ)</label>
-              <input type="range" id="gamma" min="0" max="1" step="0.01" value="0.9">
-              <span id="gamma-valor">0.9</span>
-            </div>
-            <div class="control">
-              <label for="epsilon">Exploración inicial (ε)</label>
-              <input type="range" id="epsilon" min="0" max="1" step="0.01" value="1">
-              <span id="epsilon-valor">1.0</span>
-            </div>
-            <div class="control">
-              <label for="velocidad">Velocidad de entrenamiento</label>
-              <input type="range" id="velocidad" min="0" max="500" step="10" value="50">
-              <span id="velocidad-valor">50 ms/paso</span>
-            </div>
-          </div>
+          <div class="simulador-grid">
+            <div class="panel-izquierdo">
+              <div class="panel-controles">
+                <div class="control">
+                  <label for="alpha">Tasa de aprendizaje (α)</label>
+                  <input type="range" id="alpha" min="0.01" max="1" step="0.01" value="0.5">
+                  <span id="alpha-valor">0.5</span>
+                </div>
+                <div class="control">
+                  <label for="gamma">Factor de descuento (γ)</label>
+                  <input type="range" id="gamma" min="0" max="1" step="0.01" value="0.9">
+                  <span id="gamma-valor">0.9</span>
+                </div>
+                <div class="control">
+                  <label for="epsilon">Exploración inicial (ε)</label>
+                  <input type="range" id="epsilon" min="0" max="1" step="0.01" value="1">
+                  <span id="epsilon-valor">1.0</span>
+                </div>
+                <div class="control">
+                  <label for="velocidad">Velocidad de entrenamiento</label>
+                  <input type="range" id="velocidad" min="0" max="500" step="10" value="50">
+                  <span id="velocidad-valor">50 ms/paso</span>
+                </div>
+              </div>
 
-          <div class="panel-metricas">
-            <div class="metrica">
-              <span class="metrica-label">Episodios</span>
-              <span id="metrica-episodios" class="metrica-valor">0</span>
-            </div>
-            <div class="metrica">
-              <span class="metrica-label">Recompensa total</span>
-              <span id="metrica-recompensa" class="metrica-valor">0</span>
-            </div>
-            <div class="metrica">
-              <span class="metrica-label">Media últimos 10</span>
-              <span id="metrica-media" class="metrica-valor">—</span>
-            </div>
-            <div class="metrica">
-              <span class="metrica-label">ε actual</span>
-              <span id="metrica-epsilon" class="metrica-valor">1.00</span>
-            </div>
-          </div>
+              <div class="panel-metricas">
+                <div class="metrica">
+                  <span class="metrica-label">Episodios</span>
+                  <span id="metrica-episodios" class="metrica-valor">0</span>
+                </div>
+                <div class="metrica">
+                  <span class="metrica-label">Recompensa total</span>
+                  <span id="metrica-recompensa" class="metrica-valor">0</span>
+                </div>
+                <div class="metrica">
+                  <span class="metrica-label">Media últimos 10</span>
+                  <span id="metrica-media" class="metrica-valor">—</span>
+                </div>
+                <div class="metrica">
+                  <span class="metrica-label">ε actual</span>
+                  <span id="metrica-epsilon" class="metrica-valor">1.00</span>
+                </div>
+              </div>
 
-          <div class="panel-acciones">
-            <div class="panel-botones">
-              <button id="btn-entrenar" type="button" class="btn-primario">Entrenar</button>
-              <button id="btn-pausar" type="button" class="btn-secundario" disabled>Pausar</button>
-              <button id="btn-paso" type="button" class="btn-secundario">Paso</button>
-              <button id="btn-reiniciar" type="button" class="btn-peligro">Reiniciar todo</button>
+              <div class="panel-acciones">
+                <div class="panel-botones">
+                  <button id="btn-entrenar" type="button" class="btn-primario">Entrenar</button>
+                  <button id="btn-pausar" type="button" class="btn-secundario" disabled>Pausar</button>
+                  <button id="btn-paso" type="button" class="btn-secundario">Paso</button>
+                  <button id="btn-reiniciar" type="button" class="btn-peligro">Reiniciar todo</button>
+                </div>
+                <div id="estado-entrenamiento" class="estado-entrenamiento">
+                  Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 100 episodios con una media ≥ 1.2 en los últimos 10 episodios, o al llegar a 300 episodios.
+                </div>
+              </div>
             </div>
-            <div id="estado-entrenamiento" class="estado-entrenamiento">
-              Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 100 episodios con una media ≥ 1.2 en los últimos 10 episodios, o al llegar a 300 episodios.
-            </div>
-          </div>
 
-          <div id="grafico-contenedor" class="grafico-contenedor" aria-live="polite">
-            <p class="grafico-vacio">Entrena el agente para ver la evolución de la recompensa.</p>
-          </div>
-          
-          <div id="q-table-contenedor" class="q-table-contenedor" aria-live="polite">
-            <p class="q-table-vacia">Entrena el agente para ver la tabla Q.</p>
+            <div class="panel-derecho">
+              <div id="interseccion-contenedor" class="interseccion-contenedor" aria-live="polite">
+                <p class="interseccion-vacia">Entrena el agente para ver la intersección.</p>
+              </div>
+            </div>
+
+            <div class="panel-inferior">
+              <div class="tabs" role="tablist" aria-label="Visualizaciones del entrenamiento">
+                <button type="button" class="tab-btn active" data-tab="grafico" role="tab" aria-selected="true" aria-controls="tab-grafico" id="tab-btn-grafico">
+                  Gráfico de recompensa
+                </button>
+                <button type="button" class="tab-btn" data-tab="qtable" role="tab" aria-selected="false" aria-controls="tab-qtable" id="tab-btn-qtable">
+                  Tabla Q
+                </button>
+              </div>
+
+              <div id="tab-grafico" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-grafico">
+                <div id="grafico-contenedor" class="grafico-contenedor" aria-live="polite">
+                  <p class="grafico-vacio">Entrena el agente para ver la evolución de la recompensa.</p>
+                </div>
+              </div>
+
+              <div id="tab-qtable" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-qtable" hidden>
+                <div id="q-table-contenedor" class="q-table-contenedor" aria-live="polite">
+                  <p class="q-table-vacia">Entrena el agente para ver la tabla Q.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -115,6 +140,7 @@
     <script src="js/entorno.js"></script>
     <script src="js/qlearning.js"></script>
     <script src="js/vistas.js"></script>
+    <script src="js/interseccion.js"></script>
     <script src="js/sim.js"></script>
   </body>
 </html>

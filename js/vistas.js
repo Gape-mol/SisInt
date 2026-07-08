@@ -4,8 +4,8 @@ const Vistas = (function () {
   let canvas = null;
   let ctx = null;
 
-  const ALTURA_GRAFICO = 320;
-  const MARGEN_GRAFICO = { arriba: 24, derecha: 24, abajo: 40, izquierda: 56 };
+  const ALTURA_GRAFICO = 480;
+  const MARGEN_GRAFICO = { arriba: 36, derecha: 32, abajo: 48, izquierda: 64 };
 
   // referencia al contenedor de la tabla Q
   function inicializar(idContenedor) {
@@ -123,10 +123,10 @@ const Vistas = (function () {
     if (!contenedorGrafico || !canvas) return;
 
     const dpr = window.devicePixelRatio || 1;
-    const anchoCss = contenedorGrafico.clientWidth;
-
-    canvas.style.width = `${anchoCss}px`;
+    canvas.style.width = '100%';
     canvas.style.height = `${ALTURA_GRAFICO}px`;
+
+    const anchoCss = canvas.clientWidth;
     canvas.width = Math.floor(anchoCss * dpr);
     canvas.height = Math.floor(ALTURA_GRAFICO * dpr);
 
@@ -147,7 +147,7 @@ const Vistas = (function () {
 
     ajustarCanvas();
 
-    const ancho = contenedorGrafico.clientWidth;
+    const ancho = canvas.clientWidth;
     const alto = ALTURA_GRAFICO;
     const { arriba, derecha, abajo, izquierda } = MARGEN_GRAFICO;
     const anchoGrafico = ancho - izquierda - derecha;
@@ -173,7 +173,7 @@ const Vistas = (function () {
 
     // ejes
     ctx.strokeStyle = '#5f6368';
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(izquierda, arriba);
     ctx.lineTo(izquierda, alto - abajo);
@@ -182,14 +182,14 @@ const Vistas = (function () {
 
     // etiquetas eje Y
     ctx.fillStyle = '#5f6368';
-    ctx.font = '12px sans-serif';
+    ctx.font = '14px sans-serif';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
     const pasosY = 4;
     for (let i = 0; i <= pasosY; i++) {
       const valor = minY + (maxY - minY) * (i / pasosY);
       const y = alto - abajo - (altoGrafico * (i / pasosY));
-      ctx.fillText(valor.toFixed(0), izquierda - 8, y);
+      ctx.fillText(valor.toFixed(0), izquierda - 12, y);
 
       ctx.strokeStyle = '#e8eaed';
       ctx.lineWidth = 1;
@@ -201,19 +201,21 @@ const Vistas = (function () {
 
     // etiquetas eje X
     ctx.fillStyle = '#5f6368';
+    ctx.font = '14px sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     const pasosX = Math.min(5, totalEpisodios);
     for (let i = 0; i <= pasosX; i++) {
       const episodio = Math.round(1 + (totalEpisodios - 1) * (i / pasosX));
       const x = izquierda + anchoGrafico * ((episodio - 1) / Math.max(1, totalEpisodios - 1));
-      ctx.fillText(String(episodio), x, alto - abajo + 8);
+      ctx.fillText(String(episodio), x, alto - abajo + 12);
     }
 
     // línea de recompensa
     ctx.strokeStyle = '#1a73e8';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
     ctx.beginPath();
     recompensas.forEach((r, i) => {
       const x = izquierda + anchoGrafico * (i / Math.max(1, totalEpisodios - 1));
@@ -232,16 +234,16 @@ const Vistas = (function () {
       const x = izquierda + anchoGrafico * (i / Math.max(1, totalEpisodios - 1));
       const y = alto - abajo - ((r - minY) / (maxY - minY)) * altoGrafico;
       ctx.beginPath();
-      ctx.arc(x, y, 3, 0, Math.PI * 2);
+      ctx.arc(x, y, 5, 0, Math.PI * 2);
       ctx.fill();
     });
 
     // leyenda
     ctx.fillStyle = '#333333';
-    ctx.font = 'bold 13px sans-serif';
+    ctx.font = 'bold 16px sans-serif';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
-    ctx.fillText('Recompensa por episodio', izquierda, 6);
+    ctx.fillText('Recompensa por episodio', izquierda, 10);
   }
 
   // limpia las visualizaciones y restaura los mensajes iniciales
