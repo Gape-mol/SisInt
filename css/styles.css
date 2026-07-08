@@ -28,8 +28,7 @@
   transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
-#navbar .nav-link:hover .nav-dot,
-#navbar .nav-link:focus .nav-dot {
+#navbar .nav-link:hover .nav-dot{
   background-color: #888888;
   transform: scale(1.2);
 }
@@ -57,8 +56,7 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-#navbar .nav-link:hover .nav-label,
-#navbar .nav-link:focus .nav-label {
+#navbar .nav-link:hover .nav-label {
   opacity: 1;
   visibility: visible;
   transform: translateX(0);
@@ -70,9 +68,17 @@
   box-shadow: 0 0 0 2px #1a73e8;
 }
 
+#navbar .nav-link:hover[href="#intro"] .nav-dot {
+  background-color: #1a73e8;
+}
+
 #navbar .nav-link.active[href="#conceptos"] .nav-dot {
   background-color: #34a853;
   box-shadow: 0 0 0 2px #34a853;
+}
+
+#navbar .nav-link:hover[href="#conceptos"] .nav-dot {
+  background-color: #34a853;
 }
 
 #navbar .nav-link.active[href="#aprendizaje"] .nav-dot {
@@ -80,9 +86,17 @@
   box-shadow: 0 0 0 2px #f9ab00;
 }
 
+#navbar .nav-link:hover[href="#aprendizaje"] .nav-dot {
+  background-color: #f9ab00;
+}
+
 #navbar .nav-link.active[href="#algoritmo"] .nav-dot {
   background-color: #9334e6;
   box-shadow: 0 0 0 2px #9334e6;
+}
+
+#navbar .nav-link:hover[href="#algoritmo"] .nav-dot {
+  background-color: #9334e6;
 }
 
 #navbar .nav-link.active[href="#caso-practico"] .nav-dot {
@@ -90,14 +104,26 @@
   box-shadow: 0 0 0 2px #ea4335;
 }
 
+#navbar .nav-link:hover[href="#caso-practico"] .nav-dot {
+  background-color: #ea4335;
+}
+
 #navbar .nav-link.active[href="./simulador.html"] .nav-dot {
   background-color: #00acc1;
   box-shadow: 0 0 0 2px #00acc1;
 }
 
+#navbar .nav-link:hover[href="./simulador.html"] .nav-dot {
+  background-color: #00acc1;
+}
+
 #navbar .nav-link.active[href="#conclusiones"] .nav-dot {
   background-color: #e37400;
   box-shadow: 0 0 0 2px #e37400;
+}
+
+#navbar .nav-link:hover[href="#conclusiones"] .nav-dot {
+  background-color: #e37400;
 }
 
 /* Base y tipografía */

@@ -62,6 +62,7 @@ footer {
 
 #navbar .nav-link.nav-modo[data-modo="entrenamiento"] .nav-dot {
   background-color: #1a73e8;
+  box-shadow: 0 0 0 2px #1a73e8;
 }
 
 #navbar .nav-link.nav-modo[data-modo="comparativo"] .nav-dot {
