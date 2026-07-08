@@ -1,14 +1,18 @@
+// Navegación lateral con scroll-spy
 document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('#navbar .nav-link');
 
+  // Filtra solo los enlaces internos de ancla
   const anchorLinks = Array.from(navLinks).filter(link =>
     link.getAttribute('href').startsWith('#')
   );
 
+  // Secciones vinculadas a esos enlaces
   const sections = anchorLinks
     .map(link => document.getElementById(link.getAttribute('href').slice(1)))
     .filter(Boolean);
 
+  // Marca como activo el punto correspondiente a una sección
   function setActiveLink(id) {
     if (!id) return;
     navLinks.forEach(link => {
@@ -16,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Determina qué sección está visible en la zona central de la pantalla
   function updateActiveLink() {
     const scrollY = window.scrollY;
     const viewportHeight = window.innerHeight;
@@ -47,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', updateActiveLink, { passive: true });
   updateActiveLink();
 
+  // Desplazamiento suave al hacer clic en un enlace interno
   anchorLinks.forEach(link => {
     link.addEventListener('click', event => {
       event.preventDefault();

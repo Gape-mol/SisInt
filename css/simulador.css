@@ -1,4 +1,42 @@
-/* Flecha "volver" en el simulador */
+#navbar {
+  left: 1rem;
+}
+
+#volver-index {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+#volver-index .nav-label {
+  position: absolute;
+  left: 1.5rem;
+  padding: 0.35rem 0.6rem;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333333;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+#volver-index:hover .nav-label,
+#volver-index:focus .nav-label {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
 .nav-arrow {
   display: block;
   width: 1.4rem;
@@ -11,44 +49,169 @@
   transition: transform 0.2s ease;
 }
 
-/* Selector de modo */
-.selector-modo {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin: 2rem 0;
+main,
+footer {
+  padding-left: 6.5rem;
 }
 
-.btn-modo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+#navbar .nav-link.nav-modo {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+#navbar .nav-link.nav-modo[data-modo="entrenamiento"] .nav-dot {
+  background-color: #1a73e8;
+}
+
+#navbar .nav-link.nav-modo[data-modo="comparativo"] .nav-dot {
+  background-color: #34a853;
+}
+
+#navbar .nav-link.nav-modo:disabled .nav-dot {
+  background-color: #cccccc;
+}
+
+#navbar .nav-link.nav-modo:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bienvenida {
+  margin: 2rem 0;
   padding: 1.5rem;
-  font-family: inherit;
-  font-size: 1rem;
-  text-align: left;
-  color: var(--color-texto);
+  text-align: center;
+  color: var(--color-texto-secundario);
   background-color: var(--color-tarjeta);
   border: 1px solid var(--color-borde);
   border-radius: var(--radio-borde);
   box-shadow: var(--sombra-suave);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.btn-modo:hover,
-.btn-modo:focus {
-  border-color: var(--color-acento);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+.modo-panel {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
 }
 
-.btn-modo strong {
-  font-size: 1.15rem;
-  color: var(--color-acento);
+.panel-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.btn-modo span {
+.panel-cabecera h2 {
+  margin: 0;
+}
+
+.panel-controles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+  margin: 1.5rem 0;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.control label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.control input[type="range"] {
+  width: 100%;
+}
+
+.control span {
+  font-size: 0.9rem;
   color: var(--color-texto-secundario);
+}
+
+.panel-metricas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.metrica {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  text-align: center;
+}
+
+.metrica-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-texto-secundario);
+  margin-bottom: 0.25rem;
+}
+
+.metrica-valor {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-texto);
+}
+
+.panel-acciones {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.panel-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.panel-botones button {
+  padding: 0.65rem 1.1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  border-radius: var(--radio-borde);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.panel-botones button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primario {
+  color: #ffffff;
+  background-color: var(--color-acento);
+}
+
+.btn-secundario {
+  color: var(--color-texto);
+  background-color: #e9ecef;
+  border-color: var(--color-borde);
+}
+
+.btn-peligro {
+  color: #ffffff;
+  background-color: #dc3545;
+}
+
+.estado-entrenamiento {
+  padding: 0.5rem 0;
+  color: var(--color-texto-secundario);
+  font-size: 0.95rem;
   line-height: 1.5;
 }
