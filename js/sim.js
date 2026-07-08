@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     historialRecompensas = [];
     crearAgente();
     actualizarMetricasUI();
+    Vistas.limpiar();
     actualizarBotonesEntrenamiento();
     estadoEntrenamiento.innerHTML =
       'Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 100 episodios con una media ≥ 1.2 en los ultimos 10 episodios, o al llegar a 300 episodios.';
@@ -128,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     recompensaTotal += recompensaEpisodio;
     historialRecompensas.push(recompensaEpisodio);
     actualizarMetricasUI();
+    Vistas.renderizarQTable(agente);
 
     if (comprobarUmbral()) {
       detenerEntrenamiento();
@@ -247,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
   btnReiniciar.addEventListener('click', resetearEntrenamiento);
 
   // inicializacion
+  Vistas.inicializar('q-table-contenedor');
   crearAgente();
   actualizarMetricasUI();
   actualizarBotonesEntrenamiento();

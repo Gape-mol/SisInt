@@ -216,3 +216,59 @@ footer {
   font-size: 0.95rem;
   line-height: 1.5;
 }
+
+.q-table-contenedor {
+  margin-top: 2rem;
+  overflow-x: auto;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  background-color: #ffffff;
+}
+
+.q-table-vacia {
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-texto-secundario);
+}
+
+.q-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.q-table thead th {
+  position: sticky;
+  top: 0;
+  padding: 0.65rem 0.5rem;
+  text-align: center;
+  font-weight: 700;
+  color: var(--color-texto);
+  background-color: #f1f3f4;
+  border-bottom: 2px solid var(--color-borde);
+  white-space: nowrap;
+}
+
+.q-table tbody td {
+  padding: 0.55rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--color-borde);
+  transition: background-color 0.2s ease;
+}
+
+.q-table tbody tr:hover td {
+  filter: brightness(0.97);
+}
+
+.q-table .q-estado {
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.q-table .mejor-accion {
+  outline: 2px solid #1a73e8;
+  outline-offset: -2px;
+  font-weight: 700;
+}

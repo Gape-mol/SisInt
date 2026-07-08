@@ -48,11 +48,28 @@ const EntornoTrafico = (function () {
     return crearEstado(flujo, patron, incidente);
   }
 
+  // genera todos los estados posibles (3 x 2 x 4 = 24)
+  function todosLosEstados() {
+    const estados = [];
+    for (const flujo of FLUJOS) {
+      for (const patron of PATRONES) {
+        for (const incidente of INCIDENTES) {
+          estados.push(crearEstado(flujo, patron, incidente));
+        }
+      }
+    }
+    return estados;
+  }
+
   return {
+    FLUJOS,
+    PATRONES,
+    INCIDENTES,
     ACCIONES,
     claveEstado,
     recompensa,
     estadoAleatorio,
+    todosLosEstados,
   };
 })();
 
