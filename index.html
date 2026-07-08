@@ -227,6 +227,39 @@
           Esta estructura de recompensas penaliza tanto la sobrereacción como la subreacción. Un agente que aprende bien no solo evita ignorar emergencias, sino que también evita generar falsas alarmas innecesarias.
         </p>
       </section>
+
+      <section id="conclusiones">
+        <h1>Conclusiones y limitaciones</h1>
+        <p>
+          A lo largo de este proyecto se ha mostrado cómo el Aprendizaje por Refuerzo permite entrenar un agente para tomar decisiones secuenciales sin depender de ejemplos etiquetados. En lugar de memorizar respuestas correctas, el agente explora el entorno, recibe recompensas y ajusta su política hasta aprender a actuar de forma coherente con los objetivos del problema.
+        </p>
+        <p>
+          El caso práctico de la intersección vehicular ilustra una aplicación plausible de detección de anomalías: un agente observa el estado de la vía (flujo, patrón e incidente) y aprende a escalar su respuesta desde "normal" hasta "emergencia". Mediante Q-Learning, la tabla Q va reflejando con el tiempo qué acción es más conveniente en cada situación, penalizando tanto la subreacción como la sobrereacción.
+        </p>
+
+        <h2>Limitaciones del enfoque</h2>
+        <p>
+          La propuesta presentada esta deliberadamente simplificada. Aunque permite comprender los fundamentos del RL aplicados a la detección de anomalías, existen limitaciones importantes que deben tenerse en cuenta:
+        </p>
+        <ul>
+          <li><strong>Espacio de estados finito y discreto:</strong> se modelan solo 24 estados posibles. Un entorno real tendría muchas más variables y valores continuos.</li>
+          <li><strong>Función de recompensa diseñada a mano:</strong> los valores +2, -1 y -3 fueron elegidos por el autor para reforzar el comportamiento deseado. En la práctica, diseñar buenas recompensas es uno de los problemas más difíciles del RL.</li>
+          <li><strong>Sensibilidad a hiperparámetros:</strong> la velocidad y calidad del aprendizaje dependen fuertemente de α, γ y ε. Valores inadecuados pueden producir convergencia lenta o inestable.</li>
+          <li><strong>Falta de generalización:</strong> el agente aprende valores para estados concretos. Si aparece una combinación no vista durante el entrenamiento, no hay garantía de que elija bien.</li>
+          <li><strong>Sin dependencia temporal:</strong> cada decisión se toma solo con el estado actual. No se considera la secuencia de estados previos, que en tráfico real suele ser relevante.</li>
+        </ul>
+
+        <h2>Trabajo futuro</h2>
+        <p>
+          Desde esta base se pueden explorar varias mejoras que acerquen el modelo a una aplicación real:
+        </p>
+        <ul>
+          <li><strong>Estados continuos:</strong> representar variables como el flujo vehicular como valores reales en lugar de categorías rígidas.</li>
+          <li><strong>Deep Q-Learning:</strong> reemplazar la tabla Q por una red neuronal profunda para manejar espacios de estados y acciones mucho mayores.</li>
+          <li><strong>Recompensas aprendidas:</strong> usar técnicas de aprendizaje por imitación o RLHF para inferir la función de recompensa a partir de datos reales.</li>
+          <li><strong>Sistemas multi-agente:</strong> coordinar varios agentes que controlen semáforos de cruces vecinos, compartiendo información para optimizar el flujo de la ciudad.</li>
+        </ul>
+      </section>
     </main>
 
     <footer>
