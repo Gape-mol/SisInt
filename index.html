@@ -41,13 +41,13 @@
       <section id="intro">
         <h1>Introducción al Aprendizaje por Refuerzo</h1>
         <p>
-          El Aprendizaje por Refuerzo (Reinforcement Learning, RL) es un tipo de proceso de aprendizaje automático en el que agentes autónomos aprenden a tomar decisiones interactuando con su entorno. Un agente autónomo es cualquier sistema capaz de decidir y actuar en respuesta a lo que percibe, sin depender de instrucciones directas. En este modelo el agente aprende a realizar su tarea por ensayo y error, sin que nadie le indique de antemano cuál es el comportamiento correcto.
+          El Aprendizaje por Refuerzo (Reinforcement Learning, RL) es un tipo de proceso de aprendizaje automático en el que agentes autónomos aprenden a tomar decisiones interactuando con su entorno (<a href="#ref-ibm" class="cita">IBM, 2024</a>; <a href="#ref-aws" class="cita">Amazon Web Services, s. f.</a>). Un agente autónomo es cualquier sistema capaz de decidir y actuar en respuesta a lo que percibe, sin depender de instrucciones directas. En este modelo el agente aprende a realizar su tarea por ensayo y error, sin que nadie le indique de antemano cuál es el comportamiento correcto.
         </p>
         <p>
           Esta forma de aprender por ensayo y error es similar a cómo aprenden las personas: un niño, por ejemplo, con el tiempo aprende que si ayuda con las tareas en la casa sus padres estarán contentos con él, mientras que si se porta mal probablemente sus padres lo regañarán, y con el tiempo aprenderá qué comportamientos le conviene repetir. Un algoritmo de RL imita ese mismo proceso, probando distintas acciones y reteniendo las que producen mejores resultados.
         </p>
         <p>
-          Dentro del aprendizaje automático suelen distinguirse tres grandes paradigmas. El aprendizaje supervisado necesita que una persona etiquete de antemano cada ejemplo con la respuesta correcta, y el modelo aprende a predecir esa respuesta para datos nuevos. El aprendizaje no supervisado recibe datos sin etiquetas y busca patrones ocultos en ellos. El Aprendizaje por Refuerzo no se parece a ninguno de los dos, no aprende a predecir ni a encontrar patrones, sino a actuar. No recibe ejemplos etiquetados de comportamiento correcto, sino que el propio agente genera experiencias que lo ayudarán a tomar decisiones a medida que interactúa con su entorno.
+          Dentro del aprendizaje automático suelen distinguirse tres grandes paradigmas (<a href="#ref-sutton" class="cita">Sutton & Barto, 2018</a>). El aprendizaje supervisado necesita que una persona etiquete de antemano cada ejemplo con la respuesta correcta, y el modelo aprende a predecir esa respuesta para datos nuevos. El aprendizaje no supervisado recibe datos sin etiquetas y busca patrones ocultos en ellos. El Aprendizaje por Refuerzo no se parece a ninguno de los dos, no aprende a predecir ni a encontrar patrones, sino a actuar. No recibe ejemplos etiquetados de comportamiento correcto, sino que el propio agente genera experiencias que lo ayudarán a tomar decisiones a medida que interactúa con su entorno.
         </p>
         <p>
           Este enfoque ofrece ventajas frente a otros métodos de aprendizaje automático. Suele desempeñarse mejor en entornos complejos y cambiantes, donde ni siquiera una persona con buen conocimiento del problema podría determinar fácilmente la mejor estrategia. Requiere menos intervención humana, ya que no depende de que alguien etiquete datos de entrenamiento. Y la recompensa acumulada en el tiempo, en lugar del resultado de una sola acción, es especialmente adecuada para problemas donde las consecuencias de una decisión no se conocen de inmediato, sino varios pasos después.
@@ -57,7 +57,7 @@
       <section id="conceptos">
         <h1>Conceptos fundamentales de Aprendizaje por Refuerzo</h1>
         <p>
-          Todo problema de RL se describe con las mismas seis piezas, sin importar el dominio en el que se aplique. Conocerlas es clave para entender cómo funciona cualquier sistema de Aprendizaje por Refuerzo.
+          Todo problema de RL se describe con las mismas seis piezas, sin importar el dominio en el que se aplique (<a href="#ref-sutton" class="cita">Sutton & Barto, 2018</a>). Conocerlas es clave para entender cómo funciona cualquier sistema de Aprendizaje por Refuerzo.
         </p>
         <div class="cards">
           <article>
@@ -115,11 +115,11 @@
       <section id="aprendizaje">
         <h1>El proceso de aprendizaje mediante recompensas</h1>
         <p>
-          A diferencia del aprendizaje supervisado, donde alguien le dice al modelo cuál es la respuesta correcta, en RL el agente nunca recibe esa respuesta directamente. Solo recibe una señal numérica —la recompensa— que le indica qué tan buena o mala fue su última decisión. A partir de esa señal, el agente ajusta su comportamiento para intentar hacerlo mejor en el futuro.
+          A diferencia del aprendizaje supervisado, donde alguien le dice al modelo cuál es la respuesta correcta, en RL el agente nunca recibe esa respuesta directamente. Solo recibe una señal numérica —la recompensa— que le indica qué tan buena o mala fue su última decisión (<a href="#ref-sutton" class="cita">Sutton & Barto, 2018</a>). A partir de esa señal, el agente ajusta su comportamiento para intentar hacerlo mejor en el futuro.
         </p>
         <h2>Exploración vs. explotación</h2>
         <p>
-          Uno de los desafíos centrales del aprendizaje por refuerzo es decidir cuándo probar algo nuevo y cuándo repetir lo que ya se sabe que funciona. A esto se le llama el equilibrio entre exploración y explotación.
+          Uno de los desafíos centrales del aprendizaje por refuerzo es decidir cuándo probar algo nuevo y cuándo repetir lo que ya se sabe que funciona (<a href="#ref-sutton" class="cita">Sutton & Barto, 2018</a>). A esto se le llama el equilibrio entre exploración y explotación.
         </p>
         <p>
           Si el agente solo explota lo que ya conoce, repite siempre las mismas acciones y nunca descubre si existe una mejor opción. Si solo explora, prueba cosas nuevas constantemente pero nunca aprovecha lo que ya aprendió. Un agente bien diseñado necesita hacer ambas cosas: seguir explorando estados y acciones nuevos, y al mismo tiempo preferir las acciones que en el pasado le han dado mayores recompensas.
@@ -130,7 +130,7 @@
           No toda buena decisión trae una recompensa inmediata, y no toda recompensa inmediata lleva al mejor resultado final. La mejor estrategia general puede requerir sacrificios a corto plazo: una acción que parece negativa en el momento puede ser parte del camino hacia un resultado mucho mejor más adelante.
         </p>
         <p>
-          Por eso el objetivo del agente no es maximizar la recompensa de una sola acción, sino la recompensa acumulada a lo largo del tiempo. Esta distinción entre el beneficio inmediato de una acción y su valor real en el contexto de una secuencia de decisiones es uno de los aspectos que hace al RL especialmente útil para problemas donde las consecuencias de una decisión no se conocen de inmediato.
+          Por eso el objetivo del agente no es maximizar la recompensa de una sola acción, sino la recompensa acumulada a lo largo del tiempo (<a href="#ref-sutton" class="cita">Sutton & Barto, 2018</a>). Esta distinción entre el beneficio inmediato de una acción y su valor real en el contexto de una secuencia de decisiones es uno de los aspectos que hace al RL especialmente útil para problemas donde las consecuencias de una decisión no se conocen de inmediato.
         </p>
 
         <h2>Cómo mejora el agente con la experiencia</h2>
@@ -149,7 +149,7 @@
         </p>
         <h2>¿Qué es Q-Learning?</h2>
         <p>
-          Q-Learning es un algoritmo de aprendizaje por refuerzo basado en valores. Su objetivo es que el agente aprenda a estimar, para cada par de estado y acción posibles, cuánta recompensa total puede esperar obtener a futuro si toma esa acción en ese estado. A ese valor se le llama valor Q, y se escribe como Q(s, a).
+          Q-Learning es un algoritmo de aprendizaje por refuerzo basado en valores (<a href="#ref-watkins" class="cita">Watkins, 1989</a>; <a href="#ref-goyal" class="cita">Goyal, 2023</a>). Su objetivo es que el agente aprenda a estimar, para cada par de estado y acción posibles, cuánta recompensa total puede esperar obtener a futuro si toma esa acción en ese estado. A ese valor se le llama valor Q, y se escribe como Q(s, a).
         </p>
         <p>
           Estos valores se almacenan en una estructura llamada tabla Q (Q-table): una tabla donde cada fila es un estado posible y cada columna es una acción posible. Al inicio del entrenamiento, todos los valores son cero porque el agente no sabe nada del entorno. A medida que el agente interactúa y recibe recompensas, los valores se van actualizando hasta reflejar cuál es la mejor acción en cada estado.
@@ -160,7 +160,7 @@
           Después de cada acción, el agente actualiza el valor Q correspondiente usando la siguiente fórmula:
         </p>
         <p>
-          <strong>Q(s, a) ← Q(s, a) + α · [ r + γ · max Q(s') − Q(s, a) ]</strong>
+          <strong>Q(s, a) ← Q(s, a) + α · [ r + γ · max Q(s') − Q(s, a) ]</strong> (<a href="#ref-watkins" class="cita">Watkins, 1989</a>)
         </p>
         <p>Donde:</p>
         <ul>
@@ -263,34 +263,43 @@
     </main>
 
     <footer>
-      <h2>Fuentes</h2>
+      <h2>Referencias</h2>
       <ul>
-        <li>
-          IBM (2024). <em>¿Qué es el aprendizaje de refuerzo?</em>
-          <a href="https://www.ibm.com/es-es/think/topics/reinforcement-learning" target="_blank" rel="noopener noreferrer">
-            ibm.com/es-es/think/topics/reinforcement-learning
-          </a>
-        </li>
-        <li>
-          Amazon Web Services (AWS). <em>¿Qué es el Aprendizaje mediante refuerzo?</em>
+        <li id="ref-aws">
+          Amazon Web Services. (s. f.). <em>What is reinforcement learning?</em>
           <a href="https://aws.amazon.com/es/what-is/reinforcement-learning/" target="_blank" rel="noopener noreferrer">
             aws.amazon.com/es/what-is/reinforcement-learning
           </a>
         </li>
-        <li>
-          Shweta Goyal (2023). <em>Introducción a Q-Learning: aprendizaje por refuerzo.</em>
+        <li id="ref-goyal">
+          Goyal, S. (2023, 24 de marzo). <em>Introducción a Q-Learning: aprendizaje por refuerzo.</em> freeCodeCamp.
           <a href="https://www.freecodecamp.org/espanol/news/introduccion-a-q-learning-aprendizaje-por-refuerzo/" target="_blank" rel="noopener noreferrer">
             freecodecamp.org/espanol/news/introduccion-a-q-learning-aprendizaje-por-refuerzo
           </a>
         </li>
+        <li id="ref-ibm">
+          IBM. (2024). <em>What is reinforcement learning?</em>
+          <a href="https://www.ibm.com/es-es/think/topics/reinforcement-learning" target="_blank" rel="noopener noreferrer">
+            ibm.com/es-es/think/topics/reinforcement-learning
+          </a>
+        </li>
+        <li id="ref-sutton">
+          Sutton, R. S., y Barto, A. G. (2018). <em>Reinforcement learning: An introduction</em> (2a ed.). MIT Press.
+          <a href="http://incompleteideas.net/book/the-book-2nd.html" target="_blank" rel="noopener noreferrer">
+            incompleteideas.net/book/the-book-2nd.html
+          </a>
+        </li>
+        <li id="ref-watkins">
+          Watkins, C. J. C. H. (1989). <em>Learning from delayed rewards</em> [Doctoral dissertation, University of Cambridge].
+        </li>
       </ul>
       <h2>Video complementario</h2>
       <p>
-          El siguiente video muestra un ejemplo concreto de un agente aprendiendo a manejar mediante Aprendizaje por Refuerzo, lo que permite visualizar en la práctica los conceptos descritos anteriormente.
-          <a href="https://www.youtube.com/watch?v=5vwBQ_KoD60" target="_blank" rel="noopener noreferrer">
-            Video: ¿Cuánto Tarda Esta IA En Aprender A Manejar?
-          </a>
-        </p>
+        El siguiente video muestra un ejemplo concreto de un agente aprendiendo a manejar mediante Aprendizaje por Refuerzo, lo que permite visualizar en la práctica los conceptos descritos anteriormente:
+        <a href="https://www.youtube.com/watch?v=5vwBQ_KoD60" target="_blank" rel="noopener noreferrer">
+          ¿Cuánto tarda esta IA en aprender a manejar?
+        </a>
+      </p>
     </footer>
     <script src="js/script.js"></script>
   </body>

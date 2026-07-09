@@ -275,6 +275,19 @@ footer li {
   color: var(--color-texto-secundario);
 }
 
+/* Citas bibliográficas en línea (APA) */
+.cita {
+  color: var(--color-acento);
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cita:hover,
+.cita:focus {
+  text-decoration: underline;
+}
+
 /* Focus visible global */
 *:focus-visible {
   outline: 3px solid var(--color-acento);
