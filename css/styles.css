@@ -274,3 +274,97 @@ footer li {
   font-size: 0.95rem;
   color: var(--color-texto-secundario);
 }
+
+/* Focus visible global */
+*:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  main,
+  footer {
+    padding: 1.75rem 2.5rem 1.75rem 4.5rem;
+  }
+
+  #conceptos .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 1rem;
+  }
+
+  #navbar {
+    top: auto;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 999px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(4px);
+  }
+
+  #navbar .nav-label {
+    display: none;
+  }
+
+  main,
+  footer {
+    padding: 1.25rem 1.25rem 5rem;
+  }
+
+  section h1 {
+    font-size: 1.65rem;
+  }
+
+  section h2 {
+    font-size: 1.2rem;
+  }
+
+  #conceptos .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .diagrama-ciclo img,
+  .diagrama-ciclo svg {
+    max-height: 45vh;
+  }
+}
+
+@media (max-width: 480px) {
+  main,
+  footer {
+    padding: 1rem 1rem 5rem;
+  }
+
+  section h1 {
+    font-size: 1.45rem;
+  }
+
+  #navbar {
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  #navbar .nav-dot {
+    width: 10px;
+    height: 10px;
+  }
+}

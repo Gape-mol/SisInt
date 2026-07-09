@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   // referencias del selector de modo
-  const bienvenida = document.getElementById('bienvenida');
   const panelEntrenamiento = document.getElementById('modo-entrenamiento');
   const panelComparativo = document.getElementById('modo-comparativo');
   const botonEntrenamiento = document.querySelector('.nav-modo[data-modo="entrenamiento"]');
@@ -10,11 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputAlpha = document.getElementById('alpha');
   const inputGamma = document.getElementById('gamma');
   const inputEpsilon = document.getElementById('epsilon');
+  const inputEpsilonMin = document.getElementById('epsilon-min');
+  const inputEpsilonDecay = document.getElementById('epsilon-decay');
   const inputVelocidad = document.getElementById('velocidad');
 
   const labelAlpha = document.getElementById('alpha-valor');
   const labelGamma = document.getElementById('gamma-valor');
   const labelEpsilon = document.getElementById('epsilon-valor');
+  const labelEpsilonMin = document.getElementById('epsilon-min-valor');
+  const labelEpsilonDecay = document.getElementById('epsilon-decay-valor');
   const labelVelocidad = document.getElementById('velocidad-valor');
 
   const btnEntrenar = document.getElementById('btn-entrenar');
@@ -66,8 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
       alpha: parseFloat(inputAlpha.value),
       gamma: parseFloat(inputGamma.value),
       epsilon: parseFloat(inputEpsilon.value),
-      epsilonMin: 0.05,
-      epsilonDecay: 0.95,
+      epsilonMin: parseFloat(inputEpsilonMin.value),
+      epsilonDecay: parseFloat(inputEpsilonDecay.value),
       acciones: EntornoTrafico.ACCIONES,
     });
     window.agenteRL = agente;
@@ -220,10 +223,10 @@ document.addEventListener('DOMContentLoaded', () => {
     sincronizarAnimacion();
   }
 
-  // avanza un unico episodio manualmente
+  // avanza un unico episodio manualmente (tambien funciona durante pausa)
   function ejecutarUnPaso() {
-    if (entrenando) return;
-    sincronizarAnimacion();
+    if (entrenando && !pausado) return;
+    if (!agente) crearAgente();
     ejecutarEpisodio();
   }
 
@@ -251,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof Comparativo !== 'undefined' && Comparativo.detener) {
       Comparativo.detener();
     }
-    bienvenida.hidden = true;
     panelComparativo.hidden = true;
     panelEntrenamiento.hidden = false;
     marcarModoActivo('entrenamiento');
@@ -259,7 +261,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // muestra el panel comparativo
   function mostrarComparativo() {
-    bienvenida.hidden = true;
     panelEntrenamiento.hidden = true;
     panelComparativo.hidden = false;
     marcarModoActivo('comparativo');
@@ -306,11 +307,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // actualiza etiquetas de hiperparametros y pausa si cambian durante entrenamiento
-  [inputAlpha, inputGamma, inputEpsilon].forEach(input => {
+  [inputAlpha, inputGamma, inputEpsilon, inputEpsilonMin, inputEpsilonDecay].forEach(input => {
     input.addEventListener('input', () => {
       labelAlpha.textContent = inputAlpha.value;
       labelGamma.textContent = inputGamma.value;
       labelEpsilon.textContent = inputEpsilon.value;
+      labelEpsilonMin.textContent = inputEpsilonMin.value;
+      labelEpsilonDecay.textContent = inputEpsilonDecay.value;
 
       if (entrenando) {
         pausarEntrenamiento();

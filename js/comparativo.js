@@ -75,6 +75,8 @@ const Comparativo = (function () {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('viewBox', '0 0 120 120');
     svg.setAttribute('class', 'interseccion-svg');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', `Intersección con flujo ${estado.flujo}, patrón ${estado.patron} e incidente ${estado.incidente}`);
 
     svg.appendChild(crearElementoSvg('image', {
       href: './assets/Street.svg',

@@ -192,7 +192,6 @@ const Interseccion = (function () {
 
   function iniciarSemaforo() {
     detenerSemaforo();
-    if (animacionPausada) return;
 
     if (modoSemaforo === 'ambar' || modoSemaforo === 'rojo') {
       aplicarModoSemaforo();
@@ -200,7 +199,9 @@ const Interseccion = (function () {
     }
 
     aplicarFaseSemaforo();
-    semaforoTimer = setInterval(alternarFase, faseMs);
+    if (!animacionPausada) {
+      semaforoTimer = setInterval(alternarFase, faseMs);
+    }
   }
 
   function detenerSemaforo() {

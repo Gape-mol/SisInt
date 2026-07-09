@@ -31,11 +31,7 @@
           Entrena un agente Q-Learning para decidir la respuesta correcta ante cada estado de la intersección.
         </p>
 
-        <div id="bienvenida" class="bienvenida">
-          <p>Selecciona un modo en el menú lateral para comenzar.</p>
-        </div>
-
-        <div id="modo-entrenamiento" class="modo-panel" hidden>
+        <div id="modo-entrenamiento" class="modo-panel">
           <div class="panel-cabecera">
             <h2>Modo entrenamiento</h2>
           </div>
@@ -57,6 +53,16 @@
                   <label for="epsilon">Exploración inicial (ε)</label>
                   <input type="range" id="epsilon" min="0" max="1" step="0.01" value="1">
                   <span id="epsilon-valor">1.0</span>
+                </div>
+                <div class="control">
+                  <label for="epsilon-min">Exploración mínima (ε<sub>min</sub>)</label>
+                  <input type="range" id="epsilon-min" min="0" max="1" step="0.01" value="0.05">
+                  <span id="epsilon-min-valor">0.05</span>
+                </div>
+                <div class="control">
+                  <label for="epsilon-decay">Decaimiento de exploración</label>
+                  <input type="range" id="epsilon-decay" min="0.80" max="0.99" step="0.001" value="0.95">
+                  <span id="epsilon-decay-valor">0.95</span>
                 </div>
                 <div class="control">
                   <label for="velocidad">Velocidad de entrenamiento</label>
@@ -139,7 +145,7 @@
               <div id="comparativo-estado-texto" class="comparativo-estado-texto">
                 —
               </div>
-              <div id="comparativo-interseccion" class="interseccion-contenedor" aria-live="polite">
+              <div id="comparativo-interseccion" class="interseccion-contenedor" aria-live="polite" aria-label="Miniatura esquemática de la intersección para el modo comparativo">
                 <p class="interseccion-vacia">Entrena el agente antes de jugar.</p>
               </div>
             </div>
