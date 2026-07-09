@@ -18,7 +18,7 @@
         <span class="nav-dot"></span>
         <span class="nav-label">Entrenar agente</span>
       </button>
-      <button type="button" class="nav-link nav-modo" data-modo="comparativo" disabled aria-label="Tú eres el agente">
+      <button type="button" class="nav-link nav-modo" data-modo="comparativo" aria-label="Tú eres el agente">
         <span class="nav-dot"></span>
         <span class="nav-label">Tú eres el agente</span>
       </button>
@@ -92,7 +92,7 @@
                   <button id="btn-reiniciar" type="button" class="btn-peligro">Reiniciar todo</button>
                 </div>
                 <div id="estado-entrenamiento" class="estado-entrenamiento">
-                  Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 100 episodios con una media ≥ 1.2 en los últimos 10 episodios, o al llegar a 300 episodios.
+                  Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 50 episodios con una media ≥ 1.2 en los últimos 10 episodios, o al llegar a 100 episodios.
                 </div>
               </div>
             </div>
@@ -127,6 +127,75 @@
             </div>
           </div>
         </div>
+
+        <div id="modo-comparativo" class="modo-panel" hidden>
+          <div class="panel-cabecera">
+            <h2>Modo comparativo: tú vs el agente</h2>
+          </div>
+
+          <div class="comparativo-grid">
+            <div class="comparativo-estado">
+              <h3>Estado actual de la intersección</h3>
+              <div id="comparativo-estado-texto" class="comparativo-estado-texto">
+                —
+              </div>
+              <div id="comparativo-interseccion" class="interseccion-contenedor" aria-live="polite">
+                <p class="interseccion-vacia">Entrena el agente antes de jugar.</p>
+              </div>
+            </div>
+
+            <div class="comparativo-marcador">
+              <h3>Marcador</h3>
+              <div class="marcador-filas">
+                <div class="marcador-item">
+                  <span class="marcador-label">Tú</span>
+                  <span id="marcador-usuario" class="marcador-valor">0</span>
+                </div>
+                <div class="marcador-item">
+                  <span class="marcador-label">Agente</span>
+                  <span id="marcador-agente" class="marcador-valor">0</span>
+                </div>
+                <div class="marcador-item">
+                  <span class="marcador-label">Ronda</span>
+                  <span id="marcador-ronda" class="marcador-valor">0/10</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="comparativo-acciones">
+              <h3>Elige una acción</h3>
+              <p class="comparativo-ayuda">Selecciona la respuesta que consideres correcta para el estado mostrado.</p>
+              <div class="comparativo-botones">
+                <button type="button" class="btn-comparativo" data-accion="0">Normal</button>
+                <button type="button" class="btn-comparativo" data-accion="1">Alerta leve</button>
+                <button type="button" class="btn-comparativo" data-accion="2">Alerta crítica</button>
+                <button type="button" class="btn-comparativo" data-accion="3">Emergencia</button>
+              </div>
+              <div id="comparativo-resultado" class="comparativo-resultado" aria-live="polite"></div>
+              <div class="comparativo-control">
+                <button id="btn-nueva-ronda" type="button" class="btn-primario" hidden>Jugar de nuevo</button>
+              </div>
+            </div>
+
+            <div class="comparativo-historial">
+              <h3>Historial de rondas</h3>
+              <table id="comparativo-tabla" class="comparativo-tabla">
+                <thead>
+                  <tr>
+                    <th>Ronda</th>
+                    <th>Estado</th>
+                    <th>Tú</th>
+                    <th>Agente</th>
+                    <th>Recompensa tú</th>
+                    <th>Recompensa agente</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <div id="comparativo-resumen" class="comparativo-resumen" hidden></div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -141,6 +210,7 @@
     <script src="js/qlearning.js"></script>
     <script src="js/vistas.js"></script>
     <script src="js/interseccion.js"></script>
+    <script src="js/comparativo.js"></script>
     <script src="js/sim.js"></script>
   </body>
 </html>

@@ -68,6 +68,7 @@ const EntornoTrafico = (function () {
     ACCIONES,
     claveEstado,
     recompensa,
+    severidad,
     estadoAleatorio,
     todosLosEstados,
   };

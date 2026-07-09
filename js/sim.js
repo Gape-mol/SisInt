@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // referencias del selector de modo
   const bienvenida = document.getElementById('bienvenida');
   const panelEntrenamiento = document.getElementById('modo-entrenamiento');
+  const panelComparativo = document.getElementById('modo-comparativo');
   const botonEntrenamiento = document.querySelector('.nav-modo[data-modo="entrenamiento"]');
   const botonComparativo = document.querySelector('.nav-modo[data-modo="comparativo"]');
 
@@ -32,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabContents = document.querySelectorAll('.tab-content');
 
   // constantes de configuracion del entrenamiento
-  const EPISODIOS_MIN = 100;
-  const EPISODIOS_MAX = 300;
+  const EPISODIOS_MIN = 50;
+  const EPISODIOS_MAX = 100;
   const MEDIA_UMBRAL = 1.2;
   const PASOS_POR_EPISODIO = 10;
 
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       epsilonDecay: 0.95,
       acciones: EntornoTrafico.ACCIONES,
     });
+    window.agenteRL = agente;
   }
 
   // actualiza las metricas mostradas en pantalla
@@ -119,12 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
     Vistas.limpiar();
     Interseccion.limpiar();
     Interseccion.inicializar('interseccion-contenedor');
+    Comparativo.resetear();
     animacionCongelada = false;
     Interseccion.reanudarAnimacion();
     actualizarBotonesEntrenamiento();
     sincronizarAnimacion();
     estadoEntrenamiento.innerHTML =
-      'Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 100 episodios con una media ≥ 1.2 en los ultimos 10 episodios, o al llegar a 300 episodios.';
+      'Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 50 episodios con una media ≥ 1.2 en los ultimos 10 episodios, o al llegar a 100 episodios.';
   }
 
   // ejecuta un episodio completo de entrenamiento
@@ -245,9 +248,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // muestra el panel de entrenamiento
   function mostrarEntrenamiento() {
+    if (typeof Comparativo !== 'undefined' && Comparativo.detener) {
+      Comparativo.detener();
+    }
     bienvenida.hidden = true;
+    panelComparativo.hidden = true;
     panelEntrenamiento.hidden = false;
     marcarModoActivo('entrenamiento');
+  }
+
+  // muestra el panel comparativo
+  function mostrarComparativo() {
+    bienvenida.hidden = true;
+    panelEntrenamiento.hidden = true;
+    panelComparativo.hidden = false;
+    marcarModoActivo('comparativo');
+
+    if (!agente || !(agente.q instanceof Map) || agente.q.size === 0) {
+      alert('Primero entrena al agente en el modo Entrenamiento para poder compararte con él.');
+      mostrarEntrenamiento();
+      return;
+    }
+
+    Comparativo.iniciarRonda();
   }
 
   // cambia entre las pestañas de visualización
@@ -271,6 +294,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // event listeners del selector de modo
   if (botonEntrenamiento) {
     botonEntrenamiento.addEventListener('click', mostrarEntrenamiento);
+  }
+
+  if (botonComparativo) {
+    botonComparativo.addEventListener('click', mostrarComparativo);
   }
 
   // event listeners de las pestañas
@@ -307,6 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
   Vistas.inicializar('q-table-contenedor');
   Vistas.inicializarGrafico('grafico-contenedor');
   Interseccion.inicializar('interseccion-contenedor');
+  Comparativo.inicializar();
   crearAgente();
   actualizarMetricasUI();
   actualizarBotonesEntrenamiento();
