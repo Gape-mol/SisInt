@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (entrenando && comprobarUmbral()) {
       detenerEntrenamiento();
-      estadoEntrenamiento.innerHTML = `<strong>Entrenamiento completado.</strong> ${episodiosObjetivoRonda} episodios entrenados. Media últimos 10: ${formatearNumero(calcularMediaUltimos(10))}. Pulsa <strong>Entrenar</strong> para añadir más episodios.`;
+      estadoEntrenamiento.innerHTML = `<strong>Entrenamiento completado.</strong> ${episodiosObjetivoRonda} episodios entrenados. Recompensa Media últimos 100: ${formatearNumero(calcularMediaUltimos(10))}. Pulsa <strong>Entrenar</strong> para añadir más episodios.`;
       return;
     }
   }
