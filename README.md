@@ -60,6 +60,7 @@ No se utilizan frameworks externos ni dependencias de build. El sitio se sirve d
 │   ├── sim.js              # Orquestador del simulador
 │   ├── vistas.js           # Render de tabla Q y gráfico
 │   ├── interseccion.js     # Visualización SVG de la intersección
+│   ├── interactivos.js     # Widgets didacticos en el contenido
 │   └── comparativo.js      # Modo "tú eres el agente"
 ├── assets/
 │   ├── Diagram.svg         # Diagrama del ciclo agente-entorno
