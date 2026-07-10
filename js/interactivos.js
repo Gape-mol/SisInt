@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const explora = tirada < epsilon;
 
       resultado.textContent = explora
-        ? '🎲 El agente exploró: probó una acción al azar, sin importar si era la que mejor conocía.'
-        : '⭐ El agente explotó: eligió la acción con el valor Q más alto que ya conocía.';
+        ? 'El agente exploró: probó una acción al azar, sin importar si era la que mejor conocía.'
+        : 'El agente explotó: eligió la acción con el valor Q más alto que ya conocía.';
       resultado.classList.remove('demo-resultado-explorar', 'demo-resultado-explotar');
       resultado.classList.add(explora ? 'demo-resultado-explorar' : 'demo-resultado-explotar');
     });
@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           feedback.textContent = esCorrecta
-            ? '✅ ¡Correcto! Esa es la recompensa que recibiría el agente.'
-            : `❌ No exactamente. La recompensa correcta es ${correcta}.`;
+            ? '¡Correcto! Esa es la recompensa que recibiría el agente.'
+            : `No exactamente. La recompensa correcta es ${correcta}.`;
           feedback.classList.add(esCorrecta ? 'quiz-feedback-correcta' : 'quiz-feedback-incorrecta');
         });
       });
