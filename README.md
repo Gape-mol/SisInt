@@ -114,20 +114,6 @@ Desde allí podrás navegar por el contenido educativo y acceder al simulador me
 3. Descomprime el archivo descargado.
 4. Abre el archivo `index.html` del interior de la carpeta con tu navegador.
 
-#### Servidor local opcional
-
-Si prefieres servir el proyecto mediante un servidor local, puedes usar Python:
-
-```bash
-python -m http.server 8000
-```
-
-Luego abre en tu navegador:
-
-```
-http://localhost:8000
-```
-
 ---
 
 ## Cómo usar el simulador
