@@ -45,9 +45,15 @@
   transition: transform 0.2s ease;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 main,
 footer {
   padding-left: 6.5rem;
+  max-width: 100%;
 }
 
 #navbar .nav-link.nav-modo {
@@ -97,21 +103,25 @@ footer {
   grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
   grid-template-rows: auto auto;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 .panel-izquierdo {
   grid-column: 1;
   grid-row: 1;
+  min-width: 0;
 }
 
 .panel-derecho {
   grid-column: 2;
   grid-row: 1;
+  min-width: 0;
 }
 
 .panel-inferior {
   grid-column: 1 / -1;
   grid-row: 2;
+  min-width: 0;
 }
 
 .panel-controles {
@@ -450,26 +460,31 @@ footer {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 .comparativo-estado {
   grid-column: 1;
   grid-row: 1 / 3;
+  min-width: 0;
 }
 
 .comparativo-marcador {
   grid-column: 2;
   grid-row: 1;
+  min-width: 0;
 }
 
 .comparativo-acciones {
   grid-column: 2;
   grid-row: 2;
+  min-width: 0;
 }
 
 .comparativo-historial {
   grid-column: 1 / -1;
   grid-row: 3;
+  min-width: 0;
 }
 
 .comparativo-estado,
