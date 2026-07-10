@@ -24,9 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const btnQuizGlobal = document.getElementById('btn-quiz-global');
+
   // Muestra la diapositiva "index" y oculta el resto
   function mostrarSlide(index, { enfocar = false } = {}) {
     if (index < 0 || index >= slides.length) return;
+
+    if (typeof window.cerrarQuizOverlay === 'function') {
+      window.cerrarQuizOverlay();
+    }
 
     slides.forEach((slide, i) => {
       slide.classList.toggle('slide-activa', i === index);
@@ -43,6 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cada diapositiva puede tener contenido más largo que la pantalla
     slides[index].scrollTop = 0;
+
+    // El botón "?" apunta al quiz de la diapositiva activa (si tiene uno)
+    if (btnQuizGlobal) {
+      const idQuiz = `quiz-modal-${slides[index].id}`;
+      const tieneQuiz = document.getElementById(idQuiz) !== null;
+      if (tieneQuiz) {
+        btnQuizGlobal.setAttribute('aria-controls', idQuiz);
+        btnQuizGlobal.hidden = false;
+      } else {
+        btnQuizGlobal.removeAttribute('aria-controls');
+        btnQuizGlobal.hidden = true;
+      }
+    }
 
     if (enfocar) {
       slides[index].setAttribute('tabindex', '-1');
@@ -74,6 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Navegación por teclado (flechas y Av Pág / Re Pág)
   document.addEventListener('keydown', event => {
+    if (typeof window.hayQuizOverlayAbierto === 'function' && window.hayQuizOverlayAbierto()) {
+      return; // el overlay del quiz maneja su propio teclado (Escape)
+    }
     if (['ArrowRight', 'PageDown'].includes(event.key)) {
       event.preventDefault();
       irSiguiente();
@@ -91,6 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('touchend', event => {
     if (touchStartX === null) return;
+    if (typeof window.hayQuizOverlayAbierto === 'function' && window.hayQuizOverlayAbierto()) {
+      touchStartX = null;
+      return;
+    }
     const deltaX = event.changedTouches[0].clientX - touchStartX;
     const UMBRAL = 50;
     if (deltaX > UMBRAL) {

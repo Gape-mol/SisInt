@@ -51,7 +51,39 @@
         </p>
         <p>
           Este enfoque ofrece ventajas frente a otros métodos de aprendizaje automático. Suele desempeñarse mejor en entornos complejos y cambiantes, donde ni siquiera una persona con buen conocimiento del problema podría determinar fácilmente la mejor estrategia. Requiere menos intervención humana, ya que no depende de que alguien etiquete datos de entrenamiento. Y la recompensa acumulada en el tiempo, en lugar del resultado de una sola acción, es especialmente adecuada para problemas donde las consecuencias de una decisión no se conocen de inmediato, sino varios pasos después.
-        </p>
+        </p>        <div class="quiz-overlay" id="quiz-modal-intro">
+          <div class="quiz-overlay-fondo" data-cerrar-quiz></div>
+          <div class="quiz-overlay-panel" role="dialog" aria-modal="true" aria-labelledby="quiz-modal-intro-titulo">
+            <button type="button" class="quiz-cerrar" data-cerrar-quiz aria-label="Cerrar quiz">&times;</button>
+            <div class="quiz-comprension">
+              <h2 id="quiz-modal-intro-titulo">Pon a prueba lo que aprendiste</h2>
+
+          <div class="quiz-pregunta" data-correcta="ensayo">
+            <p class="quiz-enunciado">
+              1. En Aprendizaje por Refuerzo, ¿quién le indica al agente cuál es la decisión correcta en cada situación?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="experto">Un experto que etiqueta cada ejemplo</button>
+              <button type="button" class="quiz-opcion" data-valor="ensayo">Nadie: el agente aprende por ensayo y error</button>
+              <button type="button" class="quiz-opcion" data-valor="sabe">El agente ya lo sabe desde el inicio</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-pregunta" data-correcta="secuenciales">
+            <p class="quiz-enunciado">
+              2. ¿Qué tipo de problema resuelve mejor el RL en comparación con el aprendizaje supervisado?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="precios">Predecir precios de casas a partir de datos históricos</button>
+              <button type="button" class="quiz-opcion" data-valor="secuenciales">Tomar decisiones secuenciales en entornos cambiantes</button>
+              <button type="button" class="quiz-opcion" data-valor="agrupar">Agrupar clientes similares sin usar etiquetas</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="conceptos">
@@ -109,7 +141,39 @@
 
         <p>
           Estos seis elementos interactúan en un ciclo continuo: el agente observa un estado, elige una acción según su política, y el entorno responde con una recompensa y un nuevo estado. Este ciclo se repite muchas veces, permitiendo que el agente mejore su política con cada experiencia.
-        </p>
+        </p>        <div class="quiz-overlay" id="quiz-modal-conceptos">
+          <div class="quiz-overlay-fondo" data-cerrar-quiz></div>
+          <div class="quiz-overlay-panel" role="dialog" aria-modal="true" aria-labelledby="quiz-modal-conceptos-titulo">
+            <button type="button" class="quiz-cerrar" data-cerrar-quiz aria-label="Cerrar quiz">&times;</button>
+            <div class="quiz-comprension">
+              <h2 id="quiz-modal-conceptos-titulo">Pon a prueba lo que aprendiste</h2>
+
+          <div class="quiz-pregunta" data-correcta="estado">
+            <p class="quiz-enunciado">
+              1. Un sensor reporta que la temperatura es 35°C en este instante. ¿Qué elemento del RL representa mejor esa lectura?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="estado">Estado</button>
+              <button type="button" class="quiz-opcion" data-valor="accion">Acción</button>
+              <button type="button" class="quiz-opcion" data-valor="recompensa">Recompensa</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-pregunta" data-correcta="politica">
+            <p class="quiz-enunciado">
+              2. ¿Qué elemento define la estrategia final que el agente usa para decidir qué hacer ante cada estado?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="entorno">Entorno</button>
+              <button type="button" class="quiz-opcion" data-valor="politica">Política</button>
+              <button type="button" class="quiz-opcion" data-valor="recompensa">Recompensa</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="aprendizaje">
@@ -125,6 +189,20 @@
           Si el agente solo explota lo que ya conoce, repite siempre las mismas acciones y nunca descubre si existe una mejor opción. Si solo explora, prueba cosas nuevas constantemente pero nunca aprovecha lo que ya aprendió. Un agente bien diseñado necesita hacer ambas cosas: seguir explorando estados y acciones nuevos, y al mismo tiempo preferir las acciones que en el pasado le han dado mayores recompensas.
         </p>
 
+        <div class="mini-demo" id="demo-exploracion">
+          <p class="mini-demo-titulo">Pruébalo tú mismo: mueve el control y simula decisiones del agente</p>
+          <label for="slider-epsilon" class="mini-demo-label">
+            Probabilidad de explorar (ε): <strong id="valor-epsilon">30%</strong>
+          </label>
+          <input type="range" id="slider-epsilon" min="0" max="100" value="30" step="5">
+          <div class="demo-barra" aria-hidden="true">
+            <div class="barra-explorar" id="barra-explorar" style="width: 30%;">Explorar</div>
+            <div class="barra-explotar" id="barra-explotar" style="width: 70%;">Explotar</div>
+          </div>
+          <button type="button" id="btn-simular-decision" class="boton-demo">Simular una decisión</button>
+          <p id="resultado-decision" class="demo-resultado" aria-live="polite"></p>
+        </div>
+
         <h2>Recompensa inmediata vs. beneficio a largo plazo</h2>
         <p>
           No toda buena decisión trae una recompensa inmediata, y no toda recompensa inmediata lleva al mejor resultado final. La mejor estrategia general puede requerir sacrificios a corto plazo: una acción que parece negativa en el momento puede ser parte del camino hacia un resultado mucho mejor más adelante.
@@ -139,7 +217,39 @@
         </p>
         <p>
           Con suficientes repeticiones, el agente converge hacia una política estable que le permite tomar buenas decisiones ante situaciones que ya ha visto, e incluso generalizar ante situaciones nuevas similares a las que ya conoce.
-        </p>
+        </p>        <div class="quiz-overlay" id="quiz-modal-aprendizaje">
+          <div class="quiz-overlay-fondo" data-cerrar-quiz></div>
+          <div class="quiz-overlay-panel" role="dialog" aria-modal="true" aria-labelledby="quiz-modal-aprendizaje-titulo">
+            <button type="button" class="quiz-cerrar" data-cerrar-quiz aria-label="Cerrar quiz">&times;</button>
+            <div class="quiz-comprension">
+              <h2 id="quiz-modal-aprendizaje-titulo">Pon a prueba lo que aprendiste</h2>
+
+          <div class="quiz-pregunta" data-correcta="explotar">
+            <p class="quiz-enunciado">
+              1. Un agente siempre elige la acción que ya sabe que funciona bien, sin probar nunca algo nuevo. ¿Qué está haciendo?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="explorar">Solo explorar</button>
+              <button type="button" class="quiz-opcion" data-valor="explotar">Solo explotar</button>
+              <button type="button" class="quiz-opcion" data-valor="ninguna">Ninguna de las dos</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-pregunta" data-correcta="acumulada">
+            <p class="quiz-enunciado">
+              2. El objetivo del agente es maximizar...
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="proxima">La recompensa de la próxima acción únicamente</button>
+              <button type="button" class="quiz-opcion" data-valor="acumulada">La recompensa acumulada a lo largo del tiempo</button>
+              <button type="button" class="quiz-opcion" data-valor="exploradas">El número de acciones exploradas</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="algoritmo">
@@ -173,6 +283,63 @@
         <p>
           Con cada actualización, el agente incorpora lo que acaba de aprender sin olvidar todo lo anterior. Después de muchas repeticiones, los valores Q convergen y la tabla refleja la política óptima: en cada estado, la acción con el valor Q más alto es la mejor decisión posible.
         </p>
+
+        <div class="mini-demo" id="demo-bellman">
+          <p class="mini-demo-titulo">Pruébalo tú mismo: cambia los valores y observa cómo se actualiza Q(s, a)</p>
+          <div class="demo-bellman-inputs">
+            <label>Q(s,a) actual
+              <input type="number" id="input-q" value="0.3" step="0.1">
+            </label>
+            <label>α (tasa de aprendizaje)
+              <input type="number" id="input-alfa" value="0.5" step="0.1" min="0" max="1">
+            </label>
+            <label>r (recompensa recibida)
+              <input type="number" id="input-r" value="2" step="0.5">
+            </label>
+            <label>γ (factor de descuento)
+              <input type="number" id="input-gamma" value="0.9" step="0.1" min="0" max="1">
+            </label>
+            <label>max Q(s') futuro
+              <input type="number" id="input-maxq" value="1.1" step="0.1">
+            </label>
+          </div>
+          <div class="demo-bellman-resultado">
+            <p id="formula-sustituida" class="demo-formula"></p>
+            <p id="resultado-q" class="demo-resultado-q"></p>
+          </div>
+        </div>        <div class="quiz-overlay" id="quiz-modal-algoritmo">
+          <div class="quiz-overlay-fondo" data-cerrar-quiz></div>
+          <div class="quiz-overlay-panel" role="dialog" aria-modal="true" aria-labelledby="quiz-modal-algoritmo-titulo">
+            <button type="button" class="quiz-cerrar" data-cerrar-quiz aria-label="Cerrar quiz">&times;</button>
+            <div class="quiz-comprension">
+              <h2 id="quiz-modal-algoritmo-titulo">Pon a prueba lo que aprendiste</h2>
+
+          <div class="quiz-pregunta" data-correcta="esperada">
+            <p class="quiz-enunciado">
+              1. En la tabla Q, ¿qué representa cada celda?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="estado-actual">El estado actual del entorno</button>
+              <button type="button" class="quiz-opcion" data-valor="esperada">La recompensa total esperada para un par estado-acción</button>
+              <button type="button" class="quiz-opcion" data-valor="probabilidad">La probabilidad de explorar en ese momento</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-pregunta" data-correcta="sin-experiencia">
+            <p class="quiz-enunciado">
+              2. Al inicio del entrenamiento, ¿por qué todos los valores Q son cero?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="optima">Porque el agente ya conoce la política óptima</button>
+              <button type="button" class="quiz-opcion" data-valor="sin-experiencia">Porque el agente aún no tiene experiencia del entorno</button>
+              <button type="button" class="quiz-opcion" data-valor="alfa-cero">Porque α siempre vale cero al inicio</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="caso-practico">
@@ -225,14 +392,59 @@
         </ul>
         <p>
           Esta estructura de recompensas penaliza tanto la sobrereacción como la subreacción. Un agente que aprende bien no solo evita ignorar emergencias, sino que también evita generar falsas alarmas innecesarias.
-        </p>
+        </p>        <div class="quiz-overlay" id="quiz-modal-caso-practico">
+          <div class="quiz-overlay-fondo" data-cerrar-quiz></div>
+          <div class="quiz-overlay-panel" role="dialog" aria-modal="true" aria-labelledby="quiz-modal-caso-practico-titulo">
+            <button type="button" class="quiz-cerrar" data-cerrar-quiz aria-label="Cerrar quiz">&times;</button>
+            <div class="quiz-comprension">
+              <h2 id="quiz-modal-caso-practico-titulo">Pon a prueba lo que aprendiste</h2>
+          <p class="mini-demo-titulo">Elige la recompensa que recibiría el agente en cada situación.</p>
+
+          <div class="quiz-pregunta" data-correcta="+2">
+            <p class="quiz-enunciado">
+              1. El sensor detecta flujo alto, patrón irregular y un vehículo a contraflujo — una situación que requiere <strong>alerta critica</strong>. El agente elige "Alerta crítica". ¿Qué recompensa recibe?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="+2">+2</button>
+              <button type="button" class="quiz-opcion" data-valor="-1">-1</button>
+              <button type="button" class="quiz-opcion" data-valor="-3">-3</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-pregunta" data-correcta="-3">
+            <p class="quiz-enunciado">
+              2. El sensor detecta flujo bajo, patrón normal y ningún incidente — es decir, <strong>tráfico normal</strong>. El agente elige "Protocolo de emergencia". &iquest;Que recompensa recibe?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="+2">+2</button>
+              <button type="button" class="quiz-opcion" data-valor="-1">-1</button>
+              <button type="button" class="quiz-opcion" data-valor="-3">-3</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-pregunta" data-correcta="-1">
+            <p class="quiz-enunciado">
+              3. La situación real solo requería <strong>alerta leve</strong>, pero el agente elige "Alerta crítica" (un nivel de severidad más arriba). ¿Qué recompensa recibe?
+            </p>
+            <div class="quiz-opciones">
+              <button type="button" class="quiz-opcion" data-valor="+2">+2</button>
+              <button type="button" class="quiz-opcion" data-valor="-1">-1</button>
+              <button type="button" class="quiz-opcion" data-valor="-3">-3</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+            </div>
+          </div>
+        </div>
+
         <div class="cta-simulador">
-          <a href="./simulador.html" class="boton-simulador">
-            Acceder a la simulación
-          </a>
-          <p class="cta-simulador-nota">
-            Entrena al agente en vivo, ajusta sus parámetros y compara tus propias decisiones con las suyas.
+          <h2>Ve al agente aprender en tiempo real</h2>
+          <p class="cta-simulador-texto">
+            Todo lo anterior se puede ver funcionando en el simulador: eliges los valores de α, γ y ε, y observas al agente entrenarse episodio a episodio sobre esta misma intersección. La tabla Q se va llenando en vivo, un gráfico muestra cómo sube la recompensa a medida que aprende, y una animación de la intersección refleja el estado y la acción que el agente elige en cada paso. También puedes enfrentarte tú mismo al agente ya entrenado y comparar tus decisiones con las suyas.
           </p>
+          <a href="./simulador.html" class="boton-simulador">Acceder</a>
         </div>
       </section>
 
@@ -310,6 +522,13 @@
       </section>
     </main>
 
+    <button type="button" id="btn-quiz-global" class="btn-quiz-toggle" aria-haspopup="dialog" aria-label="Abrir quiz de esta sección" hidden>
+      <svg viewBox="0 0 24 24" class="icono-pregunta" aria-hidden="true">
+        <circle cx="12" cy="12" r="11" fill="currentColor"/>
+        <text x="12" y="17" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff" font-family="Arial, sans-serif">?</text>
+      </svg>
+    </button>
+
     <div id="slide-controls" class="slide-controls" aria-hidden="false">
       <button type="button" id="btn-slide-prev" class="btn-slide" aria-label="Diapositiva anterior">
         <span aria-hidden="true">‹</span>
@@ -320,6 +539,7 @@
       </button>
     </div>
 
+    <script src="js/interactivos.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
