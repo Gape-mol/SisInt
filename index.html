@@ -6,7 +6,7 @@
       <link rel="stylesheet" href="css/styles.css">
       <title>Aprendizaje por Refuerzo</title>
   </head>
-  <body>
+  <body class="pagina-slides">
     <nav id="navbar" class="nav-dots" aria-label="Navegación principal">
       <a href="#intro" class="nav-link active" aria-label="Introducción">
         <span class="nav-dot"></span>
@@ -28,13 +28,13 @@
         <span class="nav-dot"></span>
         <span class="nav-label">Caso práctico</span>
       </a>
-      <a href="./simulador.html" class="nav-link" aria-label="Simulador">
-        <span class="nav-dot"></span>
-        <span class="nav-label">Simulador</span>
-      </a>
       <a href="#conclusiones" class="nav-link" aria-label="Conclusiones">
         <span class="nav-dot"></span>
         <span class="nav-label">Conclusiones</span>
+      </a>
+      <a href="#referencias" class="nav-link" aria-label="Referencias">
+        <span class="nav-dot"></span>
+        <span class="nav-label">Referencias</span>
       </a>
     </nav>
     <main>
@@ -226,6 +226,14 @@
         <p>
           Esta estructura de recompensas penaliza tanto la sobrereacción como la subreacción. Un agente que aprende bien no solo evita ignorar emergencias, sino que también evita generar falsas alarmas innecesarias.
         </p>
+        <div class="cta-simulador">
+          <a href="./simulador.html" class="boton-simulador">
+            Acceder a la simulación
+          </a>
+          <p class="cta-simulador-nota">
+            Entrena al agente en vivo, ajusta sus parámetros y compara tus propias decisiones con las suyas.
+          </p>
+        </div>
       </section>
 
       <section id="conclusiones">
@@ -260,11 +268,10 @@
           <li><strong>Sistemas multi-agente:</strong> coordinar varios agentes que controlen semáforos de cruces vecinos, compartiendo información para optimizar el flujo de la ciudad.</li>
         </ul>
       </section>
-    </main>
 
-    <footer>
-      <h2>Referencias</h2>
-      <ul>
+      <section id="referencias">
+        <h1>Referencias</h1>
+        <ul>
         <li id="ref-aws">
           Amazon Web Services. (s. f.). <em>What is reinforcement learning?</em>
           <a href="https://aws.amazon.com/es/what-is/reinforcement-learning/" target="_blank" rel="noopener noreferrer">
@@ -293,14 +300,26 @@
           Watkins, C. J. C. H. (1989). <em>Learning from delayed rewards</em> [Doctoral dissertation, University of Cambridge].
         </li>
       </ul>
-      <h2>Video complementario</h2>
-      <p>
-        El siguiente video muestra un ejemplo concreto de un agente aprendiendo a manejar mediante Aprendizaje por Refuerzo, lo que permite visualizar en la práctica los conceptos descritos anteriormente:
-        <a href="https://www.youtube.com/watch?v=5vwBQ_KoD60" target="_blank" rel="noopener noreferrer">
-          ¿Cuánto tarda esta IA en aprender a manejar?
-        </a>
-      </p>
-    </footer>
+        <h2>Video complementario</h2>
+        <p>
+          El siguiente video muestra un ejemplo concreto de un agente aprendiendo a manejar mediante Aprendizaje por Refuerzo, lo que permite visualizar en la práctica los conceptos descritos anteriormente:
+          <a href="https://www.youtube.com/watch?v=5vwBQ_KoD60" target="_blank" rel="noopener noreferrer">
+            ¿Cuánto tarda esta IA en aprender a manejar?
+          </a>
+        </p>
+      </section>
+    </main>
+
+    <div id="slide-controls" class="slide-controls" aria-hidden="false">
+      <button type="button" id="btn-slide-prev" class="btn-slide" aria-label="Diapositiva anterior">
+        <span aria-hidden="true">‹</span>
+      </button>
+      <span id="slide-contador" class="slide-contador">1 / 7</span>
+      <button type="button" id="btn-slide-next" class="btn-slide" aria-label="Diapositiva siguiente">
+        <span aria-hidden="true">›</span>
+      </button>
+    </div>
+
     <script src="js/script.js"></script>
   </body>
 </html>
