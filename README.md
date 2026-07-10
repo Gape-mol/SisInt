@@ -61,13 +61,14 @@ No se utilizan frameworks externos ni dependencias de build. El sitio se sirve d
 │   ├── vistas.js           # Render de tabla Q y gráfico
 │   ├── interseccion.js     # Visualización SVG de la intersección
 │   └── comparativo.js      # Modo "tú eres el agente"
-└── assets/
-    ├── Diagram.svg         # Diagrama del ciclo agente-entorno
-    ├── Street.svg          # Fondo de la intersección
-    ├── car.svg             # Icono de vehículo
-    └── left-arrow.svg      # Icono de volver
+├── assets/
+│   ├── Diagram.svg         # Diagrama del ciclo agente-entorno
+│   ├── Street.svg          # Fondo de la intersección
+│   ├── car.svg             # Icono de vehículo
+│   └── left-arrow.svg      # Icono de volver   
+└── docs/
+    └── Informe Sistemas Inteligentes.pdf     # Informe breve del proyecto
 ```
-
 ---
 
 ## Instrucciones de ejecución
@@ -131,7 +132,7 @@ http://localhost:8000
 
 ## Cómo usar el simulador
 
-1. En `index.html`, haz clic en **Simulador** en el menú lateral o navega a `simulador.html`.
+1. En `index.html`, haz clic en **Caso práctico** en el menú lateral y luego click en *Acceder* al final de la pagina o navega a `simulador.html`.
 2. En el panel de entrenamiento ajusta los hiperparámetros si lo deseas:
    - Tasa de aprendizaje (alpha).
    - Factor de descuento (gamma).
