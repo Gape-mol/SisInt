@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputEpsilonMin = document.getElementById('epsilon-min');
   const inputEpsilonDecay = document.getElementById('epsilon-decay');
   const inputVelocidad = document.getElementById('velocidad');
+  const inputEpisodios = document.getElementById('episodios-objetivo');
 
   const labelAlpha = document.getElementById('alpha-valor');
   const labelGamma = document.getElementById('gamma-valor');
@@ -36,9 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabContents = document.querySelectorAll('.tab-content');
 
   // constantes de configuracion del entrenamiento
-  const EPISODIOS_MIN = 50;
-  const EPISODIOS_MAX = 100;
-  const MEDIA_UMBRAL = 1.2;
   const PASOS_POR_EPISODIO = 10;
 
   // estado interno del entrenamiento
@@ -47,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let pausado = false;
   let timeoutId = null;
   let episodiosCompletados = 0;
+  let episodiosRonda = 0;
+  let episodiosObjetivoRonda = 0;
   let recompensaTotal = 0;
   let historialRecompensas = [];
   let animacionCongelada = false;
@@ -86,14 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
     metricaMedia.textContent = media !== null ? formatearNumero(media) : '—';
   }
 
-  // comprueba si el agente ya cumple el umbral de entrenamiento
+  // comprueba si el agente ya cumplio el numero de episodios indicado por el usuario
   function comprobarUmbral() {
-    const media = calcularMediaUltimos(10);
-    const suficientesEpisodios = episodiosCompletados >= EPISODIOS_MIN;
-    const mediaOk = media !== null && media >= MEDIA_UMBRAL;
-    const techoAlcanzado = episodiosCompletados >= EPISODIOS_MAX;
-
-    return (suficientesEpisodios && mediaOk) || techoAlcanzado;
+    return episodiosRonda >= episodiosObjetivoRonda;
   }
 
   // sincroniza la animación de la intersección con el estado del entrenamiento
@@ -117,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
     entrenando = false;
     pausado = false;
     episodiosCompletados = 0;
+    episodiosRonda = 0;
+    episodiosObjetivoRonda = 0;
     recompensaTotal = 0;
     historialRecompensas = [];
     crearAgente();
@@ -130,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarBotonesEntrenamiento();
     sincronizarAnimacion();
     estadoEntrenamiento.innerHTML =
-      'Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 50 episodios con una media ≥ 1.2 en los ultimos 10 episodios, o al llegar a 100 episodios.';
+      `Pulsa <strong>Entrenar</strong> para empezar. Se detendrá al alcanzar ${parseInt(inputEpisodios.value, 10) || 50} episodios.`;
   }
 
   // ejecuta un episodio completo de entrenamiento
@@ -158,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     agente.decaerEpsilon();
     episodiosCompletados++;
+    episodiosRonda++;
     recompensaTotal += recompensaEpisodio;
     historialRecompensas.push(recompensaEpisodio);
     actualizarMetricasUI();
@@ -165,9 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
     Vistas.renderizarGrafico(historialRecompensas);
     Interseccion.actualizarEstado(ultimoEstado, ultimaAccion);
 
-    if (comprobarUmbral()) {
+    if (entrenando && comprobarUmbral()) {
       detenerEntrenamiento();
-      estadoEntrenamiento.innerHTML = `<strong>Entrenamiento completado.</strong> Media ultimos 10 episodios: ${formatearNumero(calcularMediaUltimos(10))}.`;
+      estadoEntrenamiento.innerHTML = `<strong>Entrenamiento completado.</strong> ${episodiosObjetivoRonda} episodios entrenados. Media últimos 10: ${formatearNumero(calcularMediaUltimos(10))}. Pulsa <strong>Entrenar</strong> para añadir más episodios.`;
       return;
     }
   }
@@ -193,6 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
       pausado = false;
     } else {
       entrenando = true;
+      episodiosRonda = 0;
+      episodiosObjetivoRonda = Math.max(1, parseInt(inputEpisodios.value, 10) || 50);
     }
 
     actualizarBotonesEntrenamiento();
@@ -325,6 +325,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // actualiza la etiqueta de velocidad
   inputVelocidad.addEventListener('input', () => {
     labelVelocidad.textContent = `${inputVelocidad.value} ms/paso`;
+  });
+
+  // actualiza la etiqueta de episodios objetivo
+  inputEpisodios.addEventListener('input', () => {
+    const valor = Math.max(10, Math.min(1000, parseInt(inputEpisodios.value, 10) || 50));
   });
 
   // event listeners de los botones de control

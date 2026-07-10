@@ -65,6 +65,10 @@
                   <span id="epsilon-decay-valor">0.95</span>
                 </div>
                 <div class="control">
+                  <label for="episodios-objetivo">Episodios a entrenar</label>
+                  <input type="number" id="episodios-objetivo" min="10" max="1000" step="10" value="50">
+                </div>
+                <div class="control">
                   <label for="velocidad">Velocidad de entrenamiento</label>
                   <input type="range" id="velocidad" min="0" max="500" step="10" value="50">
                   <span id="velocidad-valor">50 ms/paso</span>
@@ -98,7 +102,7 @@
                   <button id="btn-reiniciar" type="button" class="btn-peligro">Reiniciar todo</button>
                 </div>
                 <div id="estado-entrenamiento" class="estado-entrenamiento">
-                  Pulsa <strong>Entrenar</strong> para empezar. Se detiene al cumplir 50 episodios con una media ≥ 1.2 en los últimos 10 episodios, o al llegar a 100 episodios.
+                  Pulsa <strong>Entrenar</strong> para empezar. Se detiene al alcanzar el número de episodios que indiques arriba.
                 </div>
               </div>
             </div>
