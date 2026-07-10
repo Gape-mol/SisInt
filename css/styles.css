@@ -852,11 +852,11 @@ input:focus-visible,
     max-height: 45vh;
   }
 
+  /* En celular la navegación ya la resuelven la navbar de puntos y el
+     swipe, así que ocultamos los botones ‹ › para no duplicar
+     controles ni tapar contenido. */
   .slide-controls {
-    left: 50%;
-    right: auto;
-    bottom: 4.75rem;
-    transform: translateX(-50%);
+    display: none;
   }
 }
 

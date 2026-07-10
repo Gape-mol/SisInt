@@ -105,16 +105,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Navegación táctil (swipe) para dispositivos móviles
+  // swipe para dispositivos moviles
   let touchStartX = null;
+  let touchStartY = null;
+  let esSwipeHorizontal = false;
+
   document.addEventListener('touchstart', event => {
     touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+    esSwipeHorizontal = false;
   }, { passive: true });
+
+  // Si el gesto es claramente horizontal, evitamos que el navegador lo
+  // interprete como scroll de la página o como su gesto nativo de
+  // "volver atrás" (swipe desde el borde), que cancelaría el touchend
+  // antes de que nuestro código llegue a ejecutarse.
+  document.addEventListener('touchmove', event => {
+    if (touchStartX === null || touchStartY === null) return;
+    const deltaX = event.touches[0].clientX - touchStartX;
+    const deltaY = event.touches[0].clientY - touchStartY;
+
+    if (!esSwipeHorizontal && Math.abs(deltaX) > 10 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      esSwipeHorizontal = true;
+    }
+    if (esSwipeHorizontal && event.cancelable) {
+      event.preventDefault();
+    }
+  }, { passive: false });
+
+  function resetToqueEnCurso() {
+    touchStartX = null;
+    touchStartY = null;
+    esSwipeHorizontal = false;
+  }
 
   document.addEventListener('touchend', event => {
     if (touchStartX === null) return;
     if (typeof window.hayQuizOverlayAbierto === 'function' && window.hayQuizOverlayAbierto()) {
-      touchStartX = null;
+      resetToqueEnCurso();
       return;
     }
     const deltaX = event.changedTouches[0].clientX - touchStartX;
@@ -124,8 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (deltaX < -UMBRAL) {
       irSiguiente();
     }
-    touchStartX = null;
+    resetToqueEnCurso();
   }, { passive: true });
+
+  // Si el navegador cancela el toque (p. ej. porque decidió hacer un
+  // gesto propio), dejamos el estado limpio para el próximo swipe.
+  document.addEventListener('touchcancel', resetToqueEnCurso, { passive: true });
 
   // Estado inicial: si la URL trae un ancla (#seccion), abre esa diapositiva
   const idInicial = window.location.hash.replace('#', '');
